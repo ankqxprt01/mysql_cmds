@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML & CSS Overview</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Playwrite+VN:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Sixtyfour+Convergence&display=swap');
+        body {
+            
+            line-height: 1.6;
+            font-family: "Poppins", sans-serif;
+            font-weight: 400;
+            padding: 0 20px;
+        }
+        h1 {
+            /* background-color: aqua; */
+            text-align: center;
+            font-size: 20px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+
+        @media print {
+            body {
+                font-size: 14px; /* Adjust font size for printing */
+            }
+
+            /* Hide elements you don't want to print */
+            button {
+                display: none; /* Hide the print button */
+            }
+
+            /* Remove default headers and footers in browsers */
+            @page {
+                margin: 0;
+                size: auto;
+            }
+
+            /* Hide the date and URL (typically in headers or footers) */
+            header, footer {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>MYSQL LOGIN Xampp / Wampp</h1>
+
+    
+    <h3>To Login in Xampp</h3>
+    <p>i) Open xampp server</p>
+    <p>ii) Start mysql </p>
+    <p>iii) open Shell</p>
+    <p>iv) type  commands: mysql -u root -p</p>
+    <p>v)In xampp password is empty means just hit the enter you will be logged in</p>
+    <pre>
+Setting environment for using XAMPP for Windows.
+HP@DESKTOP-L4J1INJ c:\xampp
+# mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.4.32-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]>
+
+
+    </pre>
+<p>you are now login to mysql console.To show some of databases present type:</p>
+<pre>
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| ajax_project       |
+| information_schema |
+| javareact          |
+| logindb            |
+| management         |
+| mysql              |
+| performance_schema |
+| php-db             |
+| phpdb              |
+| phpmyadmin         |
+| product            |
+| products_one       |
+| session_management |
+| test               |
+| user_db            |
+| user_system        |
+| wordpress          |
+| wordpress1         |
++--------------------+
+18 rows in set (0.201 sec)
+
+MariaDB [(none)]>
+</pre>
+<p>To use Database</p>
+<pre>
+MariaDB [(none)]> use product;
+Database changed
+MariaDB [product]>
+</pre>
+
+<p>To show tables present in your databases</p>
+<pre>
+MariaDB [product]> show tables;
++-------------------+
+| Tables_in_product |
++-------------------+
+| details           |
++-------------------+
+1 row in set (0.050 sec)   
+</pre>
+
+<p>To check data of your single table:</p>
+<pre>
+MariaDB [product]> select*from details;
++-----+-------+-------+------------------------+
+| id  | name  | price | img                    |
++-----+-------+-------+------------------------+
+| 161 | teddy |  5.00 | uploads/ARRAY-TASK.png |
+| 162 | lion  | 80.00 | uploads/DOUBT.png      |
++-----+-------+-------+------------------------+
+2 rows in set (0.216 sec)
+</pre>
+
+<hr>
+<hr>
+
+    <h3>To Login in Wampp Server</h3>
+    <p>Open Wampp</p>
+    <p>Go to mysql > mysql console</p>
+    <p>Pop up window will open with Mysql user with <u>root</u> click on Ok</p>
+    <p>It will ask for Enter password:</p>
+    <p>my password is root yours might be different</p>
+<pre>
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 186
+Server version: 8.0.29 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql>
+</pre>    
+<p>you are now login to mysql console.To show some of databases present type:</p>
+<pre>
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| a1_data            |
+| ac                 |
+| akshata            |
+| apple              |
+| employee_data      |
+| hr                 |
+| import_data        |
+| information_schema |
+| javareact          |
+| mahesh             |
+| meghna             |
+| mysql              |
+| performance_schema |
+| quickxpert         |
+| sys                |
++--------------------+
+35 rows in set (0.19 sec)
+    
+mysql>    
+</pre>
+<p>To use Database</p>
+<pre>
+    mysql> use quickxpert;
+    Database changed
+</pre>
+
+<p>To show tables present in your databases</p>
+<pre>
+mysql> show tables;
++----------------------+
+| Tables_in_quickxpert |
++----------------------+
+| school               |
+| users                |
++----------------------+
+2 rows in set (0.07 sec)
+</pre>
+
+<p>To check data of your single table:</p>
+<pre>
+mysql> select * from school;
++----+-------+------------+-------+--------+--------+
+| id | name  | dob        | city  | email  | salary |
++----+-------+------------+-------+--------+--------+
+|  1 | suraj | 1994-02-09 | goa   | abc123 | 100000 |
+|  3 | sam   | 1994-02-09 | thene | abc123 | 100000 |
++----+-------+------------+-------+--------+--------+
+2 rows in set (0.04 sec)
+    
+mysql>    
+</pre>    
+    <!-- Print button -->
+    <button onclick="window.print()">Print</button>
+
+</body>
+</html>

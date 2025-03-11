@@ -1,0 +1,68 @@
+====================================================================
+7-3-25
+================================================================
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 80
+Server version: 8.0.35 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sqlbatch           |
+| sys                |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> create database quickxpert;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use quickxpert;
+Database changed
+mysql> create table users(id int(9)primary key auto_increment,name varchar(100)not null,dob date,city varchar(100),email varchar(100) unique,password varchar(100));
+Query OK, 0 rows affected, 1 warning (0.04 sec)
+
+mysql> show tables;
++----------------------+
+| Tables_in_quickxpert |
++----------------------+
+| users                |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> desc users;
++----------+--------------+------+-----+---------+----------------+
+| Field    | Type         | Null | Key | Default | Extra          |
++----------+--------------+------+-----+---------+----------------+
+| id       | int          | NO   | PRI | NULL    | auto_increment |
+| name     | varchar(100) | NO   |     | NULL    |                |
+| dob      | date         | YES  |     | NULL    |                |
+| city     | varchar(100) | YES  |     | NULL    |                |
+| email    | varchar(100) | YES  | UNI | NULL    |                |
+| password | varchar(100) | YES  |     | NULL    |                |
++----------+--------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> insert into users (name,dob,city,email,password) values("ankit","1994-01-12","thane","ashinde@gm.io","abc");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from users;
++----+-------+------------+-------+---------------+----------+
+| id | name  | dob        | city  | email         | password |
++----+-------+------------+-------+---------------+----------+
+|  1 | ankit | 1994-01-12 | thane | ashinde@gm.io | abc      |
++----+-------+------------+-------+---------------+----------+
+1 row in set (0.00 sec)
+
+mysql>

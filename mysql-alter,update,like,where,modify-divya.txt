@@ -1,0 +1,880 @@
+user :- root 
+password:- admin
+====================================================================
+7-3-25
+================================================================
+Enter password: *****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 80
+Server version: 8.0.35 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sqlbatch           |
+| sys                |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> create database quickxpert;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use quickxpert;
+Database changed
+mysql> create table users(id int(9)primary key auto_increment,name varchar(100)not null,dob date,city varchar(100),email varchar(100) unique,password varchar(100));
+Query OK, 0 rows affected, 1 warning (0.04 sec)
+
+mysql> show tables;
++----------------------+
+| Tables_in_quickxpert |
++----------------------+
+| users                |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> desc users;
++----------+--------------+------+-----+---------+----------------+
+| Field    | Type         | Null | Key | Default | Extra          |
++----------+--------------+------+-----+---------+----------------+
+| id       | int          | NO   | PRI | NULL    | auto_increment |
+| name     | varchar(100) | NO   |     | NULL    |                |
+| dob      | date         | YES  |     | NULL    |                |
+| city     | varchar(100) | YES  |     | NULL    |                |
+| email    | varchar(100) | YES  | UNI | NULL    |                |
+| password | varchar(100) | YES  |     | NULL    |                |
++----------+--------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> insert into users (name,dob,city,email,password) values("ankit","1994-01-12","thane","ashinde@gm.io","abc");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from users;
++----+-------+------------+-------+---------------+----------+
+| id | name  | dob        | city  | email         | password |
++----+-------+------------+-------+---------------+----------+
+|  1 | ankit | 1994-01-12 | thane | ashinde@gm.io | abc      |
++----+-------+------------+-------+---------------+----------+
+1 row in set (0.00 sec)
+
+=================================================================================================================================
+10-3-25
+======================================================================================================================================
+
+Enter password: *****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 108
+Server version: 8.0.35 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| quickxpert         |
+| sqlbatch           |
+| sys                |
++--------------------+
+6 rows in set (0.02 sec)
+
+mysql> use quickxpert;
+Database changed
+mysql> show tables;
++----------------------+
+| Tables_in_quickxpert |
++----------------------+
+| users                |
++----------------------+
+1 row in set (0.01 sec)
+
+mysql> select * from users;
++----+-------+------------+-------+---------------+----------+
+| id | name  | dob        | city  | email         | password |
++----+-------+------------+-------+---------------+----------+
+|  1 | ankit | 1994-01-12 | thane | ashinde@gm.io | abc      |
++----+-------+------------+-------+---------------+----------+
+1 row in set (0.01 sec)
+
+mysql> insert into users values (2,"divya","1996-10-21","dighe", "divya@info.com","admin");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into users values ("divya","1996-10-21","dighe", "divya@info.com","admin");
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into users values ("","pooja","1996-3-6","pune", "pooja@info.com","pooja");
+ERROR 1366 (HY000): Incorrect integer value: '' for column 'id' at row 1
+mysql> insert into users values (null,"pooja","1996-3-6","pune", "pooja@info.com","pooja");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> desc users;
++----------+--------------+------+-----+---------+----------------+
+| Field    | Type         | Null | Key | Default | Extra          |
++----------+--------------+------+-----+---------+----------------+
+| id       | int          | NO   | PRI | NULL    | auto_increment |
+| name     | varchar(100) | NO   |     | NULL    |                |
+| dob      | date         | YES  |     | NULL    |                |
+| city     | varchar(100) | YES  |     | NULL    |                |
+| email    | varchar(100) | YES  | UNI | NULL    |                |
+| password | varchar(100) | YES  |     | NULL    |                |
++----------+--------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from users;
++----+-------+------------+-------+----------------+----------+
+| id | name  | dob        | city  | email          | password |
++----+-------+------------+-------+----------------+----------+
+|  1 | ankit | 1994-01-12 | thane | ashinde@gm.io  | abc      |
+|  2 | divya | 1996-10-21 | dighe | divya@info.com | admin    |
+|  3 | pooja | 1996-03-06 | pune  | pooja@info.com | pooja    |
++----+-------+------------+-------+----------------+----------+
+3 rows in set (0.00 sec)
+
+mysql> insert into users (name,dob,city,email,password) values("ankit","1994-01-12","thane","ashinde@gm.io","abc");
+ERROR 1062 (23000): Duplicate entry 'ashinde@gm.io' for key 'users.email'
+mysql> insert into users (name,dob,city,email,password) values("ankit","1994-01-12","thane","ashinde@gm.io","abc");
+ERROR 1062 (23000): Duplicate entry 'ashinde@gm.io' for key 'users.email'
+mysql> insert into users (name,dob,city,email,password) values("sandip","1995-07-22","thane","sandi@gm.io","abc")
+    -> ;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from users;
++----+--------+------------+-------+------------------+----------+
+| id | name   | dob        | city  | email            | password |
++----+--------+------------+-------+------------------+----------+
+|  1 | ankit  | 1994-01-12 | thane | ashinde@gm.io    | abc      |
+|  2 | divya  | 1996-10-21 | dighe | divya@info.com   | admin    |
+|  3 | pooja  | 1996-03-06 | pune  | pooja@info.com   | pooja    |
+|  4 | saloni | 2025-08-16 | pune  | saloni@gmail.com | 15936    |
+|  7 | sandip | 1995-07-22 | thane | sandi@gm.io      | abc      |
++----+--------+------------+-------+------------------+----------+
+5 rows in set (0.00 sec)
+
+mysql> insert into users value ("sanju","1996-3-6","pune", "sanju@info.com","admin");
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into users values ("sanju","1996-3-6","pune", "sanju@info.com","admin");
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into users values ("5","sanju","1996-3-6","pune", "sanju@info.com","admin");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from users;
++----+--------+------------+-------+------------------+----------+
+| id | name   | dob        | city  | email            | password |
++----+--------+------------+-------+------------------+----------+
+|  1 | ankit  | 1994-01-12 | thane | ashinde@gm.io    | abc      |
+|  2 | divya  | 1996-10-21 | dighe | divya@info.com   | admin    |
+|  3 | pooja  | 1996-03-06 | pune  | pooja@info.com   | pooja    |
+|  4 | saloni | 2025-08-16 | pune  | saloni@gmail.com | 15936    |
+|  5 | sanju  | 1996-03-06 | pune  | sanju@info.com   | admin    |
+|  7 | sandip | 1995-07-22 | thane | sandi@gm.io      | abc      |
++----+--------+------------+-------+------------------+----------+
+6 rows in set (0.00 sec)
+
+mysql> create table students(id int(9)primary key auto_increment,name varchar(100)not null,dob date,city varchar(100),email varchar(100) unique,password varchar(100),status char(1) default "I");
+Query OK, 0 rows affected, 1 warning (0.06 sec)
+
+mysql> desc students;
++----------+--------------+------+-----+---------+----------------+
+| Field    | Type         | Null | Key | Default | Extra          |
++----------+--------------+------+-----+---------+----------------+
+| id       | int          | NO   | PRI | NULL    | auto_increment |
+| name     | varchar(100) | NO   |     | NULL    |                |
+| dob      | date         | YES  |     | NULL    |                |
+| city     | varchar(100) | YES  |     | NULL    |                |
+| email    | varchar(100) | YES  | UNI | NULL    |                |
+| password | varchar(100) | YES  |     | NULL    |                |
+| status   | char(1)      | YES  |     | I       |                |
++----------+--------------+------+-----+---------+----------------+
+7 rows in set (0.00 sec)
+
+mysql> insert into students (name,dob,city,email,password,status) values("sam","06-05-2001","mulund","abc@gm.io","abc");
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into students (name,dob,city,email,password,status) values("sam","06-05-2001","mulund","abc@gm.io","abc","I");
+ERROR 1292 (22007): Incorrect date value: '06-05-2001' for column 'dob' at row 1
+mysql> insert into students (name,dob,city,email,password,status) values("sam","2001-15-1","mulund","abc@gm.io","abc","I");
+ERROR 1292 (22007): Incorrect date value: '2001-15-1' for column 'dob' at row 1
+mysql> insert into students (name,dob,city,email,password,status) values("sam","2001-1-1","mulund","abc@gm.io","abc","I");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM  students;
++----+------+------------+--------+-----------+----------+--------+
+| id | name | dob        | city   | email     | password | status |
++----+------+------------+--------+-----------+----------+--------+
+|  1 | sam  | 2001-01-01 | mulund | abc@gm.io | abc      | I      |
++----+------+------------+--------+-----------+----------+--------+
+1 row in set (0.00 sec)
+
+mysql> insert into students (name,dob,city,email,password,status) values("sam","2001-1-1","mulund","abc@gm.io","abc",default);
+ERROR 1062 (23000): Duplicate entry 'abc@gm.io' for key 'students.email'
+mysql> insert into students (name,dob,city,email,password,status) values("sam","2001-1-1","mulund","abcd@gm.io","abc",default);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM  students;
++----+------+------------+--------+------------+----------+--------+
+| id | name | dob        | city   | email      | password | status |
++----+------+------------+--------+------------+----------+--------+
+|  1 | sam  | 2001-01-01 | mulund | abc@gm.io  | abc      | I      |
+|  3 | sam  | 2001-01-01 | mulund | abcd@gm.io | abc      | I      |
++----+------+------------+--------+------------+----------+--------+
+2 rows in set (0.00 sec)
+
+mysql> insert into students values("samu","2001-1-1","mulund","sam.io","abc",default);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into students values("","samu","2001-1-1","mulund","sam.io","abc",default);
+ERROR 1366 (HY000): Incorrect integer value: '' for column 'id' at row 1
+mysql> insert into students values('',"samu","2001-1-1","mulund","sam.io","abc",default);
+ERROR 1366 (HY000): Incorrect integer value: '' for column 'id' at row 1
+mysql>
+==========================================
+11-3-25
+===========================================
+Enter password: *****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 173
+Server version: 8.0.35 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| quickxpert         |
+| sqlbatch           |
+| sys                |
++--------------------+
+6 rows in set (0.01 sec)
+
+mysql> use quickxpert;
+Database changed
+mysql> show tables;
++----------------------+
+| Tables_in_quickxpert |
++----------------------+
+| students             |
+| users                |
++----------------------+
+2 rows in set (0.01 sec)
+
+mysql> select * from users;
++----+--------+------------+-------+------------------+----------+
+| id | name   | dob        | city  | email            | password |
++----+--------+------------+-------+------------------+----------+
+|  1 | ankit  | 1994-01-12 | thane | ashinde@gm.io    | abc      |
+|  2 | divya  | 1996-10-21 | dighe | divya@info.com   | admin    |
+|  3 | pooja  | 1996-03-06 | pune  | pooja@info.com   | pooja    |
+|  4 | saloni | 2025-08-16 | pune  | saloni@gmail.com | 15936    |
+|  5 | sanju  | 1996-03-06 | pune  | sanju@info.com   | admin    |
+|  7 | sandip | 1995-07-22 | thane | sandi@gm.io      | abc      |
++----+--------+------------+-------+------------------+----------+
+6 rows in set (0.00 sec)
+
+mysql> alter table users
+    -> add salary bigint;
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from users;
++----+--------+------------+-------+------------------+----------+--------+
+| id | name   | dob        | city  | email            | password | salary |
++----+--------+------------+-------+------------------+----------+--------+
+|  1 | ankit  | 1994-01-12 | thane | ashinde@gm.io    | abc      |   NULL |
+|  2 | divya  | 1996-10-21 | dighe | divya@info.com   | admin    |   NULL |
+|  3 | pooja  | 1996-03-06 | pune  | pooja@info.com   | pooja    |   NULL |
+|  4 | saloni | 2025-08-16 | pune  | saloni@gmail.com | 15936    |   NULL |
+|  5 | sanju  | 1996-03-06 | pune  | sanju@info.com   | admin    |   NULL |
+|  7 | sandip | 1995-07-22 | thane | sandi@gm.io      | abc      |   NULL |
++----+--------+------------+-------+------------------+----------+--------+
+6 rows in set (0.00 sec)
+
+mysql> update users set salary=10000 where id=1;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from users;
++----+--------+------------+-------+------------------+----------+--------+
+| id | name   | dob        | city  | email            | password | salary |
++----+--------+------------+-------+------------------+----------+--------+
+|  1 | ankit  | 1994-01-12 | thane | ashinde@gm.io    | abc      |  10000 |
+|  2 | divya  | 1996-10-21 | dighe | divya@info.com   | admin    |   NULL |
+|  3 | pooja  | 1996-03-06 | pune  | pooja@info.com   | pooja    |   NULL |
+|  4 | saloni | 2025-08-16 | pune  | saloni@gmail.com | 15936    |   NULL |
+|  5 | sanju  | 1996-03-06 | pune  | sanju@info.com   | admin    |   NULL |
+|  7 | sandip | 1995-07-22 | thane | sandi@gm.io      | abc      |   NULL |
++----+--------+------------+-------+------------------+----------+--------+
+6 rows in set (0.00 sec)
+
+mysql> alter table users
+    -> drop COLUMN salary;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from users;
++----+--------+------------+-------+------------------+----------+
+| id | name   | dob        | city  | email            | password |
++----+--------+------------+-------+------------------+----------+
+|  1 | ankit  | 1994-01-12 | thane | ashinde@gm.io    | abc      |
+|  2 | divya  | 1996-10-21 | dighe | divya@info.com   | admin    |
+|  3 | pooja  | 1996-03-06 | pune  | pooja@info.com   | pooja    |
+|  4 | saloni | 2025-08-16 | pune  | saloni@gmail.com | 15936    |
+|  5 | sanju  | 1996-03-06 | pune  | sanju@info.com   | admin    |
+|  7 | sandip | 1995-07-22 | thane | sandi@gm.io      | abc      |
++----+--------+------------+-------+------------------+----------+
+6 rows in set (0.00 sec)
+
+mysql> alter table users
+    -> add column salary bigint not null default 10000;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from users;
++----+--------+------------+-------+------------------+----------+--------+
+| id | name   | dob        | city  | email            | password | salary |
++----+--------+------------+-------+------------------+----------+--------+
+|  1 | ankit  | 1994-01-12 | thane | ashinde@gm.io    | abc      |  10000 |
+|  2 | divya  | 1996-10-21 | dighe | divya@info.com   | admin    |  10000 |
+|  3 | pooja  | 1996-03-06 | pune  | pooja@info.com   | pooja    |  10000 |
+|  4 | saloni | 2025-08-16 | pune  | saloni@gmail.com | 15936    |  10000 |
+|  5 | sanju  | 1996-03-06 | pune  | sanju@info.com   | admin    |  10000 |
+|  7 | sandip | 1995-07-22 | thane | sandi@gm.io      | abc      |  10000 |
++----+--------+------------+-------+------------------+----------+--------+
+6 rows in set (0.00 sec)
+
+mysql> alter table users
+    -> drop COLUMN salary;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from users;
++----+--------+------------+-------+------------------+----------+
+| id | name   | dob        | city  | email            | password |
++----+--------+------------+-------+------------------+----------+
+|  1 | ankit  | 1994-01-12 | thane | ashinde@gm.io    | abc      |
+|  2 | divya  | 1996-10-21 | dighe | divya@info.com   | admin    |
+|  3 | pooja  | 1996-03-06 | pune  | pooja@info.com   | pooja    |
+|  4 | saloni | 2025-08-16 | pune  | saloni@gmail.com | 15936    |
+|  5 | sanju  | 1996-03-06 | pune  | sanju@info.com   | admin    |
+|  7 | sandip | 1995-07-22 | thane | sandi@gm.io      | abc      |
++----+--------+------------+-------+------------------+----------+
+6 rows in set (0.00 sec)
+
+mysql> alter table users
+    -> add salary bigint not null default 10000;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from users;
++----+--------+------------+-------+------------------+----------+--------+
+| id | name   | dob        | city  | email            | password | salary |
++----+--------+------------+-------+------------------+----------+--------+
+|  1 | ankit  | 1994-01-12 | thane | ashinde@gm.io    | abc      |  10000 |
+|  2 | divya  | 1996-10-21 | dighe | divya@info.com   | admin    |  10000 |
+|  3 | pooja  | 1996-03-06 | pune  | pooja@info.com   | pooja    |  10000 |
+|  4 | saloni | 2025-08-16 | pune  | saloni@gmail.com | 15936    |  10000 |
+|  5 | sanju  | 1996-03-06 | pune  | sanju@info.com   | admin    |  10000 |
+|  7 | sandip | 1995-07-22 | thane | sandi@gm.io      | abc      |  10000 |
++----+--------+------------+-------+------------------+----------+--------+
+6 rows in set (0.00 sec)
+
+mysql> select name,city from users;
++--------+-------+
+| name   | city  |
++--------+-------+
+| ankit  | thane |
+| divya  | dighe |
+| pooja  | pune  |
+| saloni | pune  |
+| sanju  | pune  |
+| sandip | thane |
++--------+-------+
+6 rows in set (0.00 sec)
+
+mysql> update users set name="ajit" , city="pune" where id=7;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from users;
++----+--------+------------+-------+------------------+----------+--------+
+| id | name   | dob        | city  | email            | password | salary |
++----+--------+------------+-------+------------------+----------+--------+
+|  1 | ankit  | 1994-01-12 | thane | ashinde@gm.io    | abc      |  10000 |
+|  2 | divya  | 1996-10-21 | dighe | divya@info.com   | admin    |  10000 |
+|  3 | pooja  | 1996-03-06 | pune  | pooja@info.com   | pooja    |  10000 |
+|  4 | saloni | 2025-08-16 | pune  | saloni@gmail.com | 15936    |  10000 |
+|  5 | sanju  | 1996-03-06 | pune  | sanju@info.com   | admin    |  10000 |
+|  7 | ajit   | 1995-07-22 | pune  | sandi@gm.io      | abc      |  10000 |
++----+--------+------------+-------+------------------+----------+--------+
+6 rows in set (0.00 sec)
+
+mysql> delete from users where id=7;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from users;
++----+--------+------------+-------+------------------+----------+--------+
+| id | name   | dob        | city  | email            | password | salary |
++----+--------+------------+-------+------------------+----------+--------+
+|  1 | ankit  | 1994-01-12 | thane | ashinde@gm.io    | abc      |  10000 |
+|  2 | divya  | 1996-10-21 | dighe | divya@info.com   | admin    |  10000 |
+|  3 | pooja  | 1996-03-06 | pune  | pooja@info.com   | pooja    |  10000 |
+|  4 | saloni | 2025-08-16 | pune  | saloni@gmail.com | 15936    |  10000 |
+|  5 | sanju  | 1996-03-06 | pune  | sanju@info.com   | admin    |  10000 |
++----+--------+------------+-------+------------------+----------+--------+
+5 rows in set (0.00 sec)
+
+mysql> update users set salary=20000 where id=2;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from users;
++----+--------+------------+-------+------------------+----------+--------+
+| id | name   | dob        | city  | email            | password | salary |
++----+--------+------------+-------+------------------+----------+--------+
+|  1 | ankit  | 1994-01-12 | thane | ashinde@gm.io    | abc      |  10000 |
+|  2 | divya  | 1996-10-21 | dighe | divya@info.com   | admin    |  20000 |
+|  3 | pooja  | 1996-03-06 | pune  | pooja@info.com   | pooja    |  10000 |
+|  4 | saloni | 2025-08-16 | pune  | saloni@gmail.com | 15936    |  10000 |
+|  5 | sanju  | 1996-03-06 | pune  | sanju@info.com   | admin    |  10000 |
++----+--------+------------+-------+------------------+----------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select * from students;
++----+------+------------+--------+------------+----------+--------+
+| id | name | dob        | city   | email      | password | status |
++----+------+------------+--------+------------+----------+--------+
+|  1 | sam  | 2001-01-01 | mulund | abc@gm.io  | abc      | I      |
+|  3 | sam  | 2001-01-01 | mulund | abcd@gm.io | abc      | I      |
++----+------+------------+--------+------------+----------+--------+
+2 rows in set (0.00 sec)
+
+mysql> update students set name="ajit",city="thane", status="A", password="456ghy" where id=3;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from students;
++----+------+------------+--------+------------+----------+--------+
+| id | name | dob        | city   | email      | password | status |
++----+------+------------+--------+------------+----------+--------+
+|  1 | sam  | 2001-01-01 | mulund | abc@gm.io  | abc      | I      |
+|  3 | ajit | 2001-01-01 | thane  | abcd@gm.io | 456ghy   | A      |
++----+------+------------+--------+------------+----------+--------+
+2 rows in set (0.00 sec)
+
+mysql> insert into students values("2","samu","2001-1-1","mulund","sam.io","abc",default);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from students;
++----+------+------------+--------+------------+----------+--------+
+| id | name | dob        | city   | email      | password | status |
++----+------+------------+--------+------------+----------+--------+
+|  1 | sam  | 2001-01-01 | mulund | abc@gm.io  | abc      | I      |
+|  2 | samu | 2001-01-01 | mulund | sam.io     | abc      | I      |
+|  3 | ajit | 2001-01-01 | thane  | abcd@gm.io | 456ghy   | A      |
++----+------+------------+--------+------------+----------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select * from students where status!="A";
++----+------+------------+--------+-----------+----------+--------+
+| id | name | dob        | city   | email     | password | status |
++----+------+------------+--------+-----------+----------+--------+
+|  1 | sam  | 2001-01-01 | mulund | abc@gm.io | abc      | I      |
+|  2 | samu | 2001-01-01 | mulund | sam.io    | abc      | I      |
++----+------+------------+--------+-----------+----------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select * from students where status<>"A";
++----+------+------------+--------+-----------+----------+--------+
+| id | name | dob        | city   | email     | password | status |
++----+------+------------+--------+-----------+----------+--------+
+|  1 | sam  | 2001-01-01 | mulund | abc@gm.io | abc      | I      |
+|  2 | samu | 2001-01-01 | mulund | sam.io    | abc      | I      |
++----+------+------------+--------+-----------+----------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select * from students where status<>"I";
++----+------+------------+-------+------------+----------+--------+
+| id | name | dob        | city  | email      | password | status |
++----+------+------------+-------+------------+----------+--------+
+|  3 | ajit | 2001-01-01 | thane | abcd@gm.io | 456ghy   | A      |
++----+------+------------+-------+------------+----------+--------+
+1 row in set (0.00 sec)
+
+mysql> select * from students;
++----+------+------------+--------+------------+----------+--------+
+| id | name | dob        | city   | email      | password | status |
++----+------+------------+--------+------------+----------+--------+
+|  1 | sam  | 2001-01-01 | mulund | abc@gm.io  | abc      | I      |
+|  2 | samu | 2001-01-01 | mulund | sam.io     | abc      | I      |
+|  3 | ajit | 2001-01-01 | thane  | abcd@gm.io | 456ghy   | A      |
++----+------+------------+--------+------------+----------+--------+
+3 rows in set (0.00 sec)
+
+mysql> alter table students
+    -> add fees bigint not null default 10000;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from students;
++----+------+------------+--------+------------+----------+--------+-------+
+| id | name | dob        | city   | email      | password | status | fees  |
++----+------+------------+--------+------------+----------+--------+-------+
+|  1 | sam  | 2001-01-01 | mulund | abc@gm.io  | abc      | I      | 10000 |
+|  2 | samu | 2001-01-01 | mulund | sam.io     | abc      | I      | 10000 |
+|  3 | ajit | 2001-01-01 | thane  | abcd@gm.io | 456ghy   | A      | 10000 |
++----+------+------------+--------+------------+----------+--------+-------+
+3 rows in set (0.00 sec)
+
+mysql> update students set fees=2000 where id=3;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from students;
++----+------+------------+--------+------------+----------+--------+-------+
+| id | name | dob        | city   | email      | password | status | fees  |
++----+------+------------+--------+------------+----------+--------+-------+
+|  1 | sam  | 2001-01-01 | mulund | abc@gm.io  | abc      | I      | 10000 |
+|  2 | samu | 2001-01-01 | mulund | sam.io     | abc      | I      | 10000 |
+|  3 | ajit | 2001-01-01 | thane  | abcd@gm.io | 456ghy   | A      |  2000 |
++----+------+------------+--------+------------+----------+--------+-------+
+3 rows in set (0.00 sec)
+
+mysql> update students set fees=5000 where id=2;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from students;
++----+------+------------+--------+------------+----------+--------+-------+
+| id | name | dob        | city   | email      | password | status | fees  |
++----+------+------------+--------+------------+----------+--------+-------+
+|  1 | sam  | 2001-01-01 | mulund | abc@gm.io  | abc      | I      | 10000 |
+|  2 | samu | 2001-01-01 | mulund | sam.io     | abc      | I      |  5000 |
+|  3 | ajit | 2001-01-01 | thane  | abcd@gm.io | 456ghy   | A      |  2000 |
++----+------+------------+--------+------------+----------+--------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select * from students where fees between 1000 and 5000;
++----+------+------------+--------+------------+----------+--------+------+
+| id | name | dob        | city   | email      | password | status | fees |
++----+------+------------+--------+------------+----------+--------+------+
+|  2 | samu | 2001-01-01 | mulund | sam.io     | abc      | I      | 5000 |
+|  3 | ajit | 2001-01-01 | thane  | abcd@gm.io | 456ghy   | A      | 2000 |
++----+------+------------+--------+------------+----------+--------+------+
+2 rows in set (0.00 sec)
+
+mysql> select * from students where id in(1,3);
++----+------+------------+--------+------------+----------+--------+-------+
+| id | name | dob        | city   | email      | password | status | fees  |
++----+------+------------+--------+------------+----------+--------+-------+
+|  1 | sam  | 2001-01-01 | mulund | abc@gm.io  | abc      | I      | 10000 |
+|  3 | ajit | 2001-01-01 | thane  | abcd@gm.io | 456ghy   | A      |  2000 |
++----+------+------------+--------+------------+----------+--------+-------+
+2 rows in set (0.00 sec)
+
+mysql> insert into students values("4","vansh","1996-2-2","mulund","vansh.io","ab4c",default,7000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from students;
++----+-------+------------+--------+------------+----------+--------+-------+
+| id | name  | dob        | city   | email      | password | status | fees  |
++----+-------+------------+--------+------------+----------+--------+-------+
+|  1 | sam   | 2001-01-01 | mulund | abc@gm.io  | abc      | I      | 10000 |
+|  2 | samu  | 2001-01-01 | mulund | sam.io     | abc      | I      |  5000 |
+|  3 | ajit  | 2001-01-01 | thane  | abcd@gm.io | 456ghy   | A      |  2000 |
+|  4 | vansh | 1996-02-02 | mulund | vansh.io   | ab4c     | I      |  7000 |
++----+-------+------------+--------+------------+----------+--------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from students where name in("vansh","ajit");
++----+-------+------------+--------+------------+----------+--------+------+
+| id | name  | dob        | city   | email      | password | status | fees |
++----+-------+------------+--------+------------+----------+--------+------+
+|  3 | ajit  | 2001-01-01 | thane  | abcd@gm.io | 456ghy   | A      | 2000 |
+|  4 | vansh | 1996-02-02 | mulund | vansh.io   | ab4c     | I      | 7000 |
++----+-------+------------+--------+------------+----------+--------+------+
+2 rows in set (0.00 sec)
+
+mysql> select * from students where city="mulund" and status="I";
++----+-------+------------+--------+-----------+----------+--------+-------+
+| id | name  | dob        | city   | email     | password | status | fees  |
++----+-------+------------+--------+-----------+----------+--------+-------+
+|  1 | sam   | 2001-01-01 | mulund | abc@gm.io | abc      | I      | 10000 |
+|  2 | samu  | 2001-01-01 | mulund | sam.io    | abc      | I      |  5000 |
+|  4 | vansh | 1996-02-02 | mulund | vansh.io  | ab4c     | I      |  7000 |
++----+-------+------------+--------+-----------+----------+--------+-------+
+3 rows in set (0.00 sec)
+
+mysql> update students set status="A" where id =1;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from students where city="mulund" and status="I";
++----+-------+------------+--------+----------+----------+--------+------+
+| id | name  | dob        | city   | email    | password | status | fees |
++----+-------+------------+--------+----------+----------+--------+------+
+|  2 | samu  | 2001-01-01 | mulund | sam.io   | abc      | I      | 5000 |
+|  4 | vansh | 1996-02-02 | mulund | vansh.io | ab4c     | I      | 7000 |
++----+-------+------------+--------+----------+----------+--------+------+
+2 rows in set (0.00 sec)
+
+mysql> select * from students where city="mulund" or status="I";
++----+-------+------------+--------+-----------+----------+--------+-------+
+| id | name  | dob        | city   | email     | password | status | fees  |
++----+-------+------------+--------+-----------+----------+--------+-------+
+|  1 | sam   | 2001-01-01 | mulund | abc@gm.io | abc      | A      | 10000 |
+|  2 | samu  | 2001-01-01 | mulund | sam.io    | abc      | I      |  5000 |
+|  4 | vansh | 1996-02-02 | mulund | vansh.io  | ab4c     | I      |  7000 |
++----+-------+------------+--------+-----------+----------+--------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select * from students;
++----+-------+------------+--------+------------+----------+--------+-------+
+| id | name  | dob        | city   | email      | password | status | fees  |
++----+-------+------------+--------+------------+----------+--------+-------+
+|  1 | sam   | 2001-01-01 | mulund | abc@gm.io  | abc      | A      | 10000 |
+|  2 | samu  | 2001-01-01 | mulund | sam.io     | abc      | I      |  5000 |
+|  3 | ajit  | 2001-01-01 | thane  | abcd@gm.io | 456ghy   | A      |  2000 |
+|  4 | vansh | 1996-02-02 | mulund | vansh.io   | ab4c     | I      |  7000 |
++----+-------+------------+--------+------------+----------+--------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from students where not status="I";
++----+------+------------+--------+------------+----------+--------+-------+
+| id | name | dob        | city   | email      | password | status | fees  |
++----+------+------------+--------+------------+----------+--------+-------+
+|  1 | sam  | 2001-01-01 | mulund | abc@gm.io  | abc      | A      | 10000 |
+|  3 | ajit | 2001-01-01 | thane  | abcd@gm.io | 456ghy   | A      |  2000 |
++----+------+------------+--------+------------+----------+--------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from students where name like "v%";
++----+-------+------------+--------+----------+----------+--------+------+
+| id | name  | dob        | city   | email    | password | status | fees |
++----+-------+------------+--------+----------+----------+--------+------+
+|  4 | vansh | 1996-02-02 | mulund | vansh.io | ab4c     | I      | 7000 |
++----+-------+------------+--------+----------+----------+--------+------+
+1 row in set (0.00 sec)
+
+mysql> select * from students where name like "%t";
++----+------+------------+-------+------------+----------+--------+------+
+| id | name | dob        | city  | email      | password | status | fees |
++----+------+------------+-------+------------+----------+--------+------+
+|  3 | ajit | 2001-01-01 | thane | abcd@gm.io | 456ghy   | A      | 2000 |
++----+------+------------+-------+------------+----------+--------+------+
+1 row in set (0.00 sec)
+
+mysql> select * from students where name like "%T";
++----+------+------------+-------+------------+----------+--------+------+
+| id | name | dob        | city  | email      | password | status | fees |
++----+------+------------+-------+------------+----------+--------+------+
+|  3 | ajit | 2001-01-01 | thane | abcd@gm.io | 456ghy   | A      | 2000 |
++----+------+------------+-------+------------+----------+--------+------+
+1 row in set (0.00 sec)
+
+mysql> select * from students where name like "%I%";
++----+------+------------+-------+------------+----------+--------+------+
+| id | name | dob        | city  | email      | password | status | fees |
++----+------+------------+-------+------------+----------+--------+------+
+|  3 | ajit | 2001-01-01 | thane | abcd@gm.io | 456ghy   | A      | 2000 |
++----+------+------------+-------+------------+----------+--------+------+
+1 row in set (0.00 sec)
+
+mysql> select * from students where name like "%AM%";
++----+------+------------+--------+-----------+----------+--------+-------+
+| id | name | dob        | city   | email     | password | status | fees  |
++----+------+------------+--------+-----------+----------+--------+-------+
+|  1 | sam  | 2001-01-01 | mulund | abc@gm.io | abc      | A      | 10000 |
+|  2 | samu | 2001-01-01 | mulund | sam.io    | abc      | I      |  5000 |
++----+------+------------+--------+-----------+----------+--------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from students where name like "%_M%";
++----+------+------------+--------+-----------+----------+--------+-------+
+| id | name | dob        | city   | email     | password | status | fees  |
++----+------+------------+--------+-----------+----------+--------+-------+
+|  1 | sam  | 2001-01-01 | mulund | abc@gm.io | abc      | A      | 10000 |
+|  2 | samu | 2001-01-01 | mulund | sam.io    | abc      | I      |  5000 |
++----+------+------------+--------+-----------+----------+--------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from students where name like "%_A%";
++----+-------+------------+--------+-----------+----------+--------+-------+
+| id | name  | dob        | city   | email     | password | status | fees  |
++----+-------+------------+--------+-----------+----------+--------+-------+
+|  1 | sam   | 2001-01-01 | mulund | abc@gm.io | abc      | A      | 10000 |
+|  2 | samu  | 2001-01-01 | mulund | sam.io    | abc      | I      |  5000 |
+|  4 | vansh | 1996-02-02 | mulund | vansh.io  | ab4c     | I      |  7000 |
++----+-------+------------+--------+-----------+----------+--------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select * from students where name like "a_%";
++----+------+------------+-------+------------+----------+--------+------+
+| id | name | dob        | city  | email      | password | status | fees |
++----+------+------------+-------+------------+----------+--------+------+
+|  3 | ajit | 2001-01-01 | thane | abcd@gm.io | 456ghy   | A      | 2000 |
++----+------+------------+-------+------------+----------+--------+------+
+1 row in set (0.00 sec)
+
+mysql> select * from students where name like "_a__%";
++----+-------+------------+--------+----------+----------+--------+------+
+| id | name  | dob        | city   | email    | password | status | fees |
++----+-------+------------+--------+----------+----------+--------+------+
+|  2 | samu  | 2001-01-01 | mulund | sam.io   | abc      | I      | 5000 |
+|  4 | vansh | 1996-02-02 | mulund | vansh.io | ab4c     | I      | 7000 |
++----+-------+------------+--------+----------+----------+--------+------+
+2 rows in set (0.00 sec)
+
+mysql> select * from students where name like "a__%";
++----+------+------------+-------+------------+----------+--------+------+
+| id | name | dob        | city  | email      | password | status | fees |
++----+------+------------+-------+------------+----------+--------+------+
+|  3 | ajit | 2001-01-01 | thane | abcd@gm.io | 456ghy   | A      | 2000 |
++----+------+------------+-------+------------+----------+--------+------+
+1 row in set (0.00 sec)
+
+mysql> select * from students where name like "a%t";
++----+------+------------+-------+------------+----------+--------+------+
+| id | name | dob        | city  | email      | password | status | fees |
++----+------+------------+-------+------------+----------+--------+------+
+|  3 | ajit | 2001-01-01 | thane | abcd@gm.io | 456ghy   | A      | 2000 |
++----+------+------------+-------+------------+----------+--------+------+
+1 row in set (0.00 sec)
+
+mysql> select * from students where email like "%io";
++----+-------+------------+--------+------------+----------+--------+-------+
+| id | name  | dob        | city   | email      | password | status | fees  |
++----+-------+------------+--------+------------+----------+--------+-------+
+|  1 | sam   | 2001-01-01 | mulund | abc@gm.io  | abc      | A      | 10000 |
+|  2 | samu  | 2001-01-01 | mulund | sam.io     | abc      | I      |  5000 |
+|  3 | ajit  | 2001-01-01 | thane  | abcd@gm.io | 456ghy   | A      |  2000 |
+|  4 | vansh | 1996-02-02 | mulund | vansh.io   | ab4c     | I      |  7000 |
++----+-------+------------+--------+------------+----------+--------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from students where 1=1 order by name;
++----+-------+------------+--------+------------+----------+--------+-------+
+| id | name  | dob        | city   | email      | password | status | fees  |
++----+-------+------------+--------+------------+----------+--------+-------+
+|  3 | ajit  | 2001-01-01 | thane  | abcd@gm.io | 456ghy   | A      |  2000 |
+|  1 | sam   | 2001-01-01 | mulund | abc@gm.io  | abc      | A      | 10000 |
+|  2 | samu  | 2001-01-01 | mulund | sam.io     | abc      | I      |  5000 |
+|  4 | vansh | 1996-02-02 | mulund | vansh.io   | ab4c     | I      |  7000 |
++----+-------+------------+--------+------------+----------+--------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from students  order by name;
++----+-------+------------+--------+------------+----------+--------+-------+
+| id | name  | dob        | city   | email      | password | status | fees  |
++----+-------+------------+--------+------------+----------+--------+-------+
+|  3 | ajit  | 2001-01-01 | thane  | abcd@gm.io | 456ghy   | A      |  2000 |
+|  1 | sam   | 2001-01-01 | mulund | abc@gm.io  | abc      | A      | 10000 |
+|  2 | samu  | 2001-01-01 | mulund | sam.io     | abc      | I      |  5000 |
+|  4 | vansh | 1996-02-02 | mulund | vansh.io   | ab4c     | I      |  7000 |
++----+-------+------------+--------+------------+----------+--------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from students where 1=0 order by name;
+Empty set (0.00 sec)
+
+mysql> select * from students;
++----+-------+------------+--------+------------+----------+--------+-------+
+| id | name  | dob        | city   | email      | password | status | fees  |
++----+-------+------------+--------+------------+----------+--------+-------+
+|  1 | sam   | 2001-01-01 | mulund | abc@gm.io  | abc      | A      | 10000 |
+|  2 | samu  | 2001-01-01 | mulund | sam.io     | abc      | I      |  5000 |
+|  3 | ajit  | 2001-01-01 | thane  | abcd@gm.io | 456ghy   | A      |  2000 |
+|  4 | vansh | 1996-02-02 | mulund | vansh.io   | ab4c     | I      |  7000 |
++----+-------+------------+--------+------------+----------+--------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from students  order by name;
++----+-------+------------+--------+------------+----------+--------+-------+
+| id | name  | dob        | city   | email      | password | status | fees  |
++----+-------+------------+--------+------------+----------+--------+-------+
+|  3 | ajit  | 2001-01-01 | thane  | abcd@gm.io | 456ghy   | A      |  2000 |
+|  1 | sam   | 2001-01-01 | mulund | abc@gm.io  | abc      | A      | 10000 |
+|  2 | samu  | 2001-01-01 | mulund | sam.io     | abc      | I      |  5000 |
+|  4 | vansh | 1996-02-02 | mulund | vansh.io   | ab4c     | I      |  7000 |
++----+-------+------------+--------+------------+----------+--------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from students  order by name desc;
++----+-------+------------+--------+------------+----------+--------+-------+
+| id | name  | dob        | city   | email      | password | status | fees  |
++----+-------+------------+--------+------------+----------+--------+-------+
+|  4 | vansh | 1996-02-02 | mulund | vansh.io   | ab4c     | I      |  7000 |
+|  2 | samu  | 2001-01-01 | mulund | sam.io     | abc      | I      |  5000 |
+|  1 | sam   | 2001-01-01 | mulund | abc@gm.io  | abc      | A      | 10000 |
+|  3 | ajit  | 2001-01-01 | thane  | abcd@gm.io | 456ghy   | A      |  2000 |
++----+-------+------------+--------+------------+----------+--------+-------+
+4 rows in set (0.00 sec)
+
+mysql> truncate table students;
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> select * from students;
+Empty set (0.00 sec)
+
+mysql> desc students;
++----------+--------------+------+-----+---------+----------------+
+| Field    | Type         | Null | Key | Default | Extra          |
++----------+--------------+------+-----+---------+----------------+
+| id       | int          | NO   | PRI | NULL    | auto_increment |
+| name     | varchar(100) | NO   |     | NULL    |                |
+| dob      | date         | YES  |     | NULL    |                |
+| city     | varchar(100) | YES  |     | NULL    |                |
+| email    | varchar(100) | YES  | UNI | NULL    |                |
+| password | varchar(100) | YES  |     | NULL    |                |
+| status   | char(1)      | YES  |     | I       |                |
+| fees     | bigint       | NO   |     | 10000   |                |
++----------+--------------+------+-----+---------+----------------+
+8 rows in set (0.00 sec)
+
+mysql> rename table students to std;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc students;
+ERROR 1146 (42S02): Table 'quickxpert.students' doesn't exist
+mysql> desc std;
++----------+--------------+------+-----+---------+----------------+
+| Field    | Type         | Null | Key | Default | Extra          |
++----------+--------------+------+-----+---------+----------------+
+| id       | int          | NO   | PRI | NULL    | auto_increment |
+| name     | varchar(100) | NO   |     | NULL    |                |
+| dob      | date         | YES  |     | NULL    |                |
+| city     | varchar(100) | YES  |     | NULL    |                |
+| email    | varchar(100) | YES  | UNI | NULL    |                |
+| password | varchar(100) | YES  |     | NULL    |                |
+| status   | char(1)      | YES  |     | I       |                |
+| fees     | bigint       | NO   |     | 10000   |                |
++----------+--------------+------+-----+---------+----------------+
+8 rows in set (0.00 sec)
+
+mysql>

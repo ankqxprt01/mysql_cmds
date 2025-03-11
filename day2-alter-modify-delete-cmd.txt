@@ -1,0 +1,174 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 181
+Server version: 8.0.29 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| a1_data            |
+| ac                 |
+| akshata            |
+| apple              |
+| employee_data      |
+| hr                 |
+| import_data        |
+| information_schema |
+| javareact          |
+| mahesh             |
+| meghna             |
+| mysql              |
+| performance_schema |
+| pratiksha          |
+| python4_30         |
+| python_4_6         |
+| python_batch_01    |
+| python_batch_02    |
+| quickxpert         |
+| qxp                |
+| qxp_data           |
+| qxp_data01         |
+| sakila             |
+| shreenel           |
+| suvarna            |
+| suyash_java        |
+| sys                |
+| tejas_info         |
+| users              |
+| vishal             |
+| weekend            |
+| worker             |
+| world              |
+| x                  |
+| zoo                |
++--------------------+
+35 rows in set (0.38 sec)
+
+mysql> use quickxpert;
+Database changed
+mysql> show tables;
++----------------------+
+| Tables_in_quickxpert |
++----------------------+
+| school               |
+| users                |
++----------------------+
+2 rows in set (0.29 sec)
+
+mysql> select*from school;
++----+------+------------+--------+--------+
+| id | name | dob        | city   | email  |
++----+------+------------+--------+--------+
+|  1 | johm | 1994-02-09 | thene  | abc123 |
+|  2 | john | 1993-02-09 | mumbai | 123    |
+|  3 | sam  | 1994-02-09 | thene  | abc123 |
++----+------+------------+--------+--------+
+3 rows in set (0.01 sec)
+
+TO GET NAME AND CITY
+mysql> select name,city from school;
++------+--------+
+| name | city   |
++------+--------+
+| johm | thene  |
+| john | mumbai |
+| sam  | thene  |
++------+--------+
+3 rows in set (0.00 sec)
+
+TO UPDATE SOMETHING USE--> UPDATE SET & WHERE
+mysql> update school set name="suraj",city="goa" where id=1;
+Query OK, 1 row affected (0.18 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from school;
++----+-------+------------+--------+--------+
+| id | name  | dob        | city   | email  |
++----+-------+------------+--------+--------+
+|  1 | suraj | 1994-02-09 | goa    | abc123 |
+|  2 | john  | 1993-02-09 | mumbai | 123    |
+|  3 | sam   | 1994-02-09 | thene  | abc123 |
++----+-------+------------+--------+--------+
+3 rows in set (0.00 sec)
+
+
+TO ADD COLUMN IN TABLE 
+mysql> alter table school add salary bigint;
+Query OK, 0 rows affected (0.19 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from school;
++----+-------+------------+--------+--------+--------+
+| id | name  | dob        | city   | email  | salary |
++----+-------+------------+--------+--------+--------+
+|  1 | suraj | 1994-02-09 | goa    | abc123 |   NULL |
+|  2 | john  | 1993-02-09 | mumbai | 123    |   NULL |
+|  3 | sam   | 1994-02-09 | thene  | abc123 |   NULL |
++----+-------+------------+--------+--------+--------+
+3 rows in set (0.00 sec)
+
+TO UPDATE VALUES IN TABLE
+mysql> UPDATE school SET salary = 100000 WHERE salary IS NULL;
+Query OK, 3 rows affected (0.10 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> select * from school;
++----+-------+------------+--------+--------+--------+
+| id | name  | dob        | city   | email  | salary |
++----+-------+------------+--------+--------+--------+
+|  1 | suraj | 1994-02-09 | goa    | abc123 | 100000 |
+|  2 | john  | 1993-02-09 | mumbai | 123    | 100000 |
+|  3 | sam   | 1994-02-09 | thene  | abc123 | 100000 |
++----+-------+------------+--------+--------+--------+
+3 rows in set (0.00 sec)
+
+TO DELETE COLUMN FROM TABLE
+mysql> ALTER TABLE school DROP COLUMN salary;
+mysql> select * from school;
++----+-------+------------+--------+--------+
+| id | name  | dob        | city   | email  |
++----+-------+------------+--------+--------+
+|  1 | suraj | 1994-02-09 | goa    | abc123 |
+|  2 | john  | 1993-02-09 | mumbai | 123    |
+|  3 | sam   | 1994-02-09 | thene  | abc123 |
++----+-------+------------+--------+--------+
+3 rows in set (0.00 sec)
+
+TO ADD COLUMN WITH DEFAULT VALUE	
+mysql> ALTER TABLE school ADD COLUMN salary BIGINT NOT NULL DEFAULT 100000;
+Query OK, 0 rows affected (0.37 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from school;
++----+-------+------------+--------+--------+--------+
+| id | name  | dob        | city   | email  | salary |
++----+-------+------------+--------+--------+--------+
+|  1 | suraj | 1994-02-09 | goa    | abc123 | 100000 |
+|  2 | john  | 1993-02-09 | mumbai | 123    | 100000 |
+|  3 | sam   | 1994-02-09 | thene  | abc123 | 100000 |
++----+-------+------------+--------+--------+--------+
+3 rows in set (0.00 sec)
+
+TO DELETE ROW FROM TABLE
+mysql> DELETE FROM school WHERE id = 2;
+Query OK, 1 row affected (0.09 sec)
+
+mysql> select * from school;
++----+-------+------------+-------+--------+--------+
+| id | name  | dob        | city  | email  | salary |
++----+-------+------------+-------+--------+--------+
+|  1 | suraj | 1994-02-09 | goa   | abc123 | 100000 |
+|  3 | sam   | 1994-02-09 | thene | abc123 | 100000 |
++----+-------+------------+-------+--------+--------+
+2 rows in set (0.00 sec)
+
+mysql>

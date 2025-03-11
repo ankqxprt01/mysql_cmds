@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sql Commands</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Playwrite+VN:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Sixtyfour+Convergence&display=swap');
+        body {
+            
+            line-height: 1.6;
+            font-family: "Poppins", sans-serif;
+            font-weight: 400;
+            padding: 0 20px;
+            background-color:#000;
+        }
+        h1 {
+            /* background-color: aqua; */
+            text-align: center;
+            font-size: 20px;
+            color: green;
+        }
+        p,h3{
+            color: #ccc;
+
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            color:rgb(12, 56, 87);
+            font-weight: 900;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+
+        hr{
+            border-bottom: 3px solid red !important;
+        }
+
+        @media print {
+            body {
+                font-size: 14px; /* Adjust font size for printing */
+            }
+
+            /* Hide elements you don't want to print */
+            button {
+                display: none; /* Hide the print button */
+            }
+
+            /* Remove default headers and footers in browsers */
+            @page {
+                margin: 0;
+                size: auto;
+            }
+
+            /* Hide the date and URL (typically in headers or footers) */
+            header, footer {
+                display: none;
+            }
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body style="background-color: #000;">
+    <h1>Sql Commands</h1>    
+    <pre class="text-center">
+=============What is SQL?===================
+SQL stands for Structured Query Language
+SQL is a standard language for storing, manipulating and retrieving data in databases.
+
+=============What Can SQL do?===============
+SQL can execute queries against a database
+SQL can retrieve data from a database
+SQL can insert records in a database
+SQL can update records in a database
+SQL can delete records from a database
+SQL can create new databases
+SQL can create new tables in a database
+
+SQL can create stored procedures in a database
+SQL can create views in a database
+SQL can set permissions on tables, procedures, and views
+
+============Some of The Most Important SQL Commands======
+
+SELECT - extracts data from a database
+UPDATE - updates data in a database
+DELETE - deletes data from a database
+INSERT INTO - inserts new data into a database
+CREATE DATABASE - creates a new database
+ALTER DATABASE - modifies a database
+CREATE TABLE - creates a new table
+ALTER TABLE - modifies a table
+DROP TABLE - deletes a table
+    </pre>
+
+    <pre>
+DML(Data Manipulation Language) command.
+DML commands come in the following types: SELECT, INSERT, UPDATE, & DELETE.
+
+DDL(Data Definition Language) command.
+DDL commands come in the following types: CREATE, ALTER, DROP, RENAME, and TRUNCATE.
+    </pre>
+    <h3>To create table in Xampp or wampp</h3>
+    <p>i) Log in to wampp or xampp</p>
+    <p>ii) I am using wampp </p>
+    <p>my password is empty</p>
+    <pre>
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 10
+Server version: 9.1.0 MySQL Community Server - GPL
+        
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+        
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+        
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+        
+mysql>
+
+
+    </pre>
+<p>you are now login to mysql console.To show some of databases present type:</p>
+<pre>
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| ajax_project       |
+| information_schema |
+| mysql              |
+| performance_schema |
+| product            |
+| session_management |
+| sys                |
+ +--------------------+
+7 rows in set (0.01 sec)
+</pre>
+<p>Now i want to create a new database</p>
+<p>Syntax : CREATE DATABASE database_name;</p>
+<p>It can be in uppercase or lowercase.</p>
+<pre>
+mysql> create database users;
+Query OK, 1 row affected (0.01 sec)
+    
+mysql>
+</pre>
+
+<p>Check wether its created or not type show databases</p>
+<pre>
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| ajax_project       |
+| information_schema |
+| mysql              |
+| performance_schema |
+| product            |
+| session_management |
+| sys                |
+| users              |
++--------------------+
+ 8 rows in set (0.00 sec)   
+</pre>
+
+<p>Now use your created database users by typing:</p>
+<pre>
+mysql> use users;
+Database changed
+mysql>
+</pre>
+
+<p>Now check if there is any table or not</p>   
+<pre>
+mysql> show tables;
+Empty set (0.02 sec)    
+</pre> 
+<p>it must be empty set</p>
+
+<p>now we will create table</p>
+<p>syntax to create table is:</p>
+<pre>
+    CREATE TABLE table_name (
+    column1 datatype constraints,
+    column2 datatype constraints,
+    column3 datatype constraints,
+    ...
+);
+</pre>
+
+<pre>
+    CREATE TABLE users (
+        ->     id INT PRIMARY KEY AUTO_INCREMENT,
+        ->     name VARCHAR(100) NOT NULL,
+        ->     dob DATE,
+        ->     city VARCHAR(100),
+        ->     email VARCHAR(100) UNIQUE,
+        ->     password VARCHAR(100),
+        ->     status CHAR(1) DEFAULT 'I'
+        -> );
+    Query OK, 0 rows affected, 1 warning (0.02 sec)
+    
+</pre>
+<p>id consist of intiger values</p>
+<p>INT(size)Signed range is from -2147483648 to 2147483647</p>
+<p>Unsigned range is from 0 to 4294967295</p>
+<p>The size parameter specifies the maximum display width (which is 255)</p>
+<hr>
+
+<p>A primary key uniquely identifies each row in the table and cannot have NULL values</p>
+<p>in a table there should be only one primary key</p>
+<hr>
+
+<p>AUTO_INCREMENT attribute automatically generates a unique value for the id column whenever a new record is inserted.</p>
+<hr>
+
+<p>VARCHAR(size) A VARIABLE length string (can contain letters, numbers, and special characters).</p>
+<p>The size parameter specifies the maximum column length in characters - can be from 0 to 65535</p>
+<hr>
+
+<p>
+    CHAR(size)	A FIXED length string (can contain letters, numbers, and special characters).
+</p>
+<p>The size parameter specifies the column length in characters - can be from 0 to 255. Default is 1</p>
+<p>in the above CHAR(1) Fixed-length string of 1 character</p>
+<hr>
+
+<p>DEFAULT -If user enter nothing while inserting then default is used</p>
+<hr>
+
+<p>DATE	A date. Format: YYYY-MM-DD. The supported range is from '1000-01-01' to '9999-12-31'</p>
+<hr>
+
+
+<p>now insert values in table</p>
+<pre>syntax:
+    INSERT INTO table_name (column1, column2, column3, ...)
+    VALUES (value1, value2, value3, ...);
+</pre>
+<p>there are 2ways to add values</p>
+<pre>
+i)mysql> insert into users (name,dob,city,email,password,status)
+ values("ankit","01-12-1994","thane","ashinde@gm.io","abc","A"); 
+ 
+ mysql>
+</pre>
+
+<p>now to fetch the details:</p>
+<p>Syntax select*from TABLE_NAME</p>
+
+<pre>
+    mysql> select*from users;
+    +----+-------+------------+-------+---------------+----------+--------+
+    | id | name  | dob        | city  | email         | password | status |
+    +----+-------+------------+-------+---------------+----------+--------+
+    |  1 | ankit | 0000-00-00 | thane | ashinde@gm.io | abc      | A      |
+    +----+-------+------------+-------+---------------+----------+--------+
+    1 row in set (0.00 sec)
+    
+    mysql>
+    
+</pre>
+<p>As u can see the date is not inserted in YYYY-MM-DD there it printed 0000-00-00</p>
+<p>To update dob we will use update command with set and where</p>
+<p>syntax</p>
+<pre>
+UPDATE table_name
+SET column1 = value1, column2 = value2, ...
+WHERE condition;
+</pre>
+
+<pre>
+mysql> update users set dob ="1994-01-12" where id =1;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from users;
++----+-------+------------+-------+---------------+----------+--------+
+| id | name  | dob        | city  | email         | password | status |
++----+-------+------------+-------+---------------+----------+--------+
+|  1 | ankit | 1994-01-12 | thane | ashinde@gm.io | abc      | A      |
++----+-------+------------+-------+---------------+----------+--------+
+1 row in set (0.00 sec)
+
+mysql>
+</pre>
+
+<p>If you want structure of your table</p>
+<p>it is not necessary to do after updatation you can do this after creating your table</p>
+
+<p>syntax: desc TABLE_NAME</p>
+<pre>
+    mysql> desc users;
+    +----------+--------------+------+-----+---------+----------------+
+    | Field    | Type         | Null | Key | Default | Extra          |
+    +----------+--------------+------+-----+---------+----------------+
+    | id       | int          | NO   | PRI | NULL    | auto_increment |
+    | name     | varchar(100) | NO   |     | NULL    |                |
+    | dob      | date         | YES  |     | NULL    |                |
+    | city     | varchar(100) | YES  |     | NULL    |                |
+    | email    | varchar(100) | YES  | UNI | NULL    |                |
+    | password | varchar(100) | YES  |     | NULL    |                |
+    | status   | char(1)      | YES  |     | I       |                |
+    +----------+--------------+------+-----+---------+----------------+
+    7 rows in set (0.03 sec)    
+</pre>
+<p>ii)if you are using this method you need to add each value for the table</p>
+<pre>
+mysql> INSERT INTO users
+-> VALUES (NULL, 'sam', '1989-03-09', 'nyc', 'sam@gm.io', '1234', 'A');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select*from users;
++----+-------+------------+-------+---------------+----------+--------+
+| id | name  | dob        | city  | email         | password | status |
++----+-------+------------+-------+---------------+----------+--------+
+|  1 | ankit | 1994-01-12 | thane | ashinde@gm.io | abc      | A      |
+|  2 | sam   | 1989-03-09 | nyc   | sam@gm.io     | 1234     | A      |
++----+-------+------------+-------+---------------+----------+--------+
+2 rows in set (0.00 sec)
+</pre>
+<p>as you can see i have added null for id whereas in type (i) we directly started with name</p>
+<p>now lets add one more data with type one for better understanding</p>
+<p>Example: (i) type</p>
+<pre>
+mysql> INSERT INTO users (name, dob, city, email, password)
+-> VALUES ('john', '2012-12-01', 'las vagas', 'john@gm.io', 'john321');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from users;
++----+-------+------------+-----------+---------------+----------+--------+
+| id | name  | dob        | city      | email         | password | status |
++----+-------+------------+-----------+---------------+----------+--------+
+|  1 | ankit | 1994-01-12 | thane     | ashinde@gm.io | abc      | A      |
+|  2 | sam   | 1989-03-09 | nyc       | sam@gm.io     | 1234     | A      |
+|  3 | john  | 2012-12-01 | las vagas | john@gm.io    | john321  | I      |
++----+-------+------------+-----------+---------------+----------+--------+
+3 rows in set (0.00 sec)
+
+</pre>
+<p>i dint add id and status then to it has accepted the values</p>
+<hr>
+<p>Example: (ii) type</p>
+<pre>
+mysql>  insert into users values ("rao","1988-01-12","thane","rao@gm.io","123rao");
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql>
+</pre>
+
+<p>lets add proper values</p>
+<pre>
+    mysql> insert into users values("","rao","1988-01-12","thane","rao@gm.io","rao123","I");
+    Query OK, 1 row affected, 1 warning (0.00 sec)
+    
+    mysql> SHOW WARNINGS;
+    +---------+------+------------------------------------------------------+
+    | Level   | Code | Message                                              |
+    +---------+------+------------------------------------------------------+
+    | Warning | 1366 | Incorrect integer value: '' for column 'id' at row 1 |
+    +---------+------+------------------------------------------------------+
+    1 row in set (0.00 sec)
+    
+    mysql>
+
+    mysql> select*from users;
+    +----+-------+------------+-----------+---------------+----------+--------+
+    | id | name  | dob        | city      | email         | password | status |
+    +----+-------+------------+-----------+---------------+----------+--------+
+    |  1 | ankit | 1994-01-12 | thane     | ashinde@gm.io | abc      | A      |
+    |  2 | sam   | 1989-03-09 | nyc       | sam@gm.io     | 1234     | A      |
+    |  3 | john  | 2012-12-01 | las vagas | john@gm.io    | john321  | I      |
+    |  4 | rao   | 1988-01-12 | thane     | rao@gm.io     | rao123   | I      |
+    +----+-------+------------+-----------+---------------+----------+--------+
+    4 rows in set (0.00 sec)
+</pre>
+<p>now i have added empty string for id then also it has accepted but some times it wont add and give this error</p>
+<p>it means pass empty string or null for (ii) type but add all values else it will throw error</p>
+    <!-- Print button -->
+    <button onclick="window.print()">Print</button>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled">
+            <a class="page-link" href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="page-item active"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="Commands2.html">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
