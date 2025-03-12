@@ -78,6 +78,12 @@
 DML(Data Manipulation Language) command.
 DML commands come in the following types: SELECT, INSERT, UPDATE, & DELETE.
 
+In This we will lern:
+1)SELECT
+2)UPDATE
+3)ALTER
+4)DROP
+
 DDL(Data Definition Language) command.
 DDL commands come in the following types: CREATE, ALTER, DROP, RENAME, and TRUNCATE.
     </pre>
@@ -105,272 +111,261 @@ mysql>
     </pre>
 <p>you are now login to mysql console.To show some of databases present type:</p>
 <pre>
-mysql> show databases;
-+--------------------+
-| Database           |
-+--------------------+
-| ajax_project       |
-| information_schema |
-| mysql              |
-| performance_schema |
-| product            |
-| session_management |
-| sys                |
- +--------------------+
-7 rows in set (0.01 sec)
+    mysql> show databases;
+    +--------------------+
+    | Database           |
+    +--------------------+
+    | ajax_project       |
+    | information_schema |
+    | mysql              |
+    | performance_schema |
+    | product            |
+    | session_management |
+    | sys                |
+    | users              |
+    +--------------------+
+    8 rows in set (0.03 sec)
 </pre>
-<p>Now i want to create a new database</p>
-<p>Syntax : CREATE DATABASE database_name;</p>
-<p>It can be in uppercase or lowercase.</p>
+<p>use your database with use command</p>
 <pre>
-mysql> create database users;
-Query OK, 1 row affected (0.01 sec)
-    
-mysql>
-</pre>
-
-<p>Check wether its created or not type show databases</p>
-<pre>
-mysql> show databases;
-+--------------------+
-| Database           |
-+--------------------+
-| ajax_project       |
-| information_schema |
-| mysql              |
-| performance_schema |
-| product            |
-| session_management |
-| sys                |
-| users              |
-+--------------------+
- 8 rows in set (0.00 sec)   
-</pre>
-
-<p>Now use your created database users by typing:</p>
-<pre>
-mysql> use users;
-Database changed
-mysql>
-</pre>
-
-<p>Now check if there is any table or not</p>   
-<pre>
-mysql> show tables;
-Empty set (0.02 sec)    
-</pre> 
-<p>it must be empty set</p>
-
-<p>now we will create table</p>
-<p>syntax to create table is:</p>
-<pre>
-    CREATE TABLE table_name (
-    column1 datatype constraints,
-    column2 datatype constraints,
-    column3 datatype constraints,
-    ...
-);
-</pre>
-
-<pre>
-    CREATE TABLE users (
-        ->     id INT PRIMARY KEY AUTO_INCREMENT,
-        ->     name VARCHAR(100) NOT NULL,
-        ->     dob DATE,
-        ->     city VARCHAR(100),
-        ->     email VARCHAR(100) UNIQUE,
-        ->     password VARCHAR(100),
-        ->     status CHAR(1) DEFAULT 'I'
-        -> );
-    Query OK, 0 rows affected, 1 warning (0.02 sec)
-    
-</pre>
-<p>id consist of intiger values</p>
-<p>INT(size)Signed range is from -2147483648 to 2147483647</p>
-<p>Unsigned range is from 0 to 4294967295</p>
-<p>The size parameter specifies the maximum display width (which is 255)</p>
-<hr>
-
-<p>A primary key uniquely identifies each row in the table and cannot have NULL values</p>
-<p>in a table there should be only one primary key</p>
-<hr>
-
-<p>AUTO_INCREMENT attribute automatically generates a unique value for the id column whenever a new record is inserted.</p>
-<hr>
-
-<p>VARCHAR(size) A VARIABLE length string (can contain letters, numbers, and special characters).</p>
-<p>The size parameter specifies the maximum column length in characters - can be from 0 to 65535</p>
-<hr>
-
-<p>
-    CHAR(size)	A FIXED length string (can contain letters, numbers, and special characters).
-</p>
-<p>The size parameter specifies the column length in characters - can be from 0 to 255. Default is 1</p>
-<p>in the above CHAR(1) Fixed-length string of 1 character</p>
-<hr>
-
-<p>DEFAULT -If user enter nothing while inserting then default is used</p>
-<hr>
-
-<p>DATE	A date. Format: YYYY-MM-DD. The supported range is from '1000-01-01' to '9999-12-31'</p>
-<hr>
-
-
-<p>now insert values in table</p>
-<pre>syntax:
-    INSERT INTO table_name (column1, column2, column3, ...)
-    VALUES (value1, value2, value3, ...);
-</pre>
-<p>there are 2ways to add values</p>
-<pre>
-i)mysql> insert into users (name,dob,city,email,password,status)
- values("ankit","01-12-1994","thane","ashinde@gm.io","abc","A"); 
- 
- mysql>
-</pre>
-
-<p>now to fetch the details:</p>
-<p>Syntax select*from TABLE_NAME</p>
-
-<pre>
-    mysql> select*from users;
-    +----+-------+------------+-------+---------------+----------+--------+
-    | id | name  | dob        | city  | email         | password | status |
-    +----+-------+------------+-------+---------------+----------+--------+
-    |  1 | ankit | 0000-00-00 | thane | ashinde@gm.io | abc      | A      |
-    +----+-------+------------+-------+---------------+----------+--------+
-    1 row in set (0.00 sec)
-    
+    mysql> use users;
+    Database changed
     mysql>
-    
-</pre>
-<p>As u can see the date is not inserted in YYYY-MM-DD there it printed 0000-00-00</p>
-<p>To update dob we will use update command with set and where</p>
-<p>syntax</p>
-<pre>
-UPDATE table_name
-SET column1 = value1, column2 = value2, ...
-WHERE condition;
 </pre>
 
+<p>Now fetch your data from table</p>
+
 <pre>
-mysql> update users set dob ="1994-01-12" where id =1;
-Query OK, 1 row affected (0.00 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
-
-mysql> select*from users;
-+----+-------+------------+-------+---------------+----------+--------+
-| id | name  | dob        | city  | email         | password | status |
-+----+-------+------------+-------+---------------+----------+--------+
-|  1 | ankit | 1994-01-12 | thane | ashinde@gm.io | abc      | A      |
-+----+-------+------------+-------+---------------+----------+--------+
-1 row in set (0.00 sec)
-
-mysql>
-</pre>
-
-<p>If you want structure of your table</p>
-<p>it is not necessary to do after updatation you can do this after creating your table</p>
-
-<p>syntax: desc TABLE_NAME</p>
-<pre>
-    mysql> desc users;
-    +----------+--------------+------+-----+---------+----------------+
-    | Field    | Type         | Null | Key | Default | Extra          |
-    +----------+--------------+------+-----+---------+----------------+
-    | id       | int          | NO   | PRI | NULL    | auto_increment |
-    | name     | varchar(100) | NO   |     | NULL    |                |
-    | dob      | date         | YES  |     | NULL    |                |
-    | city     | varchar(100) | YES  |     | NULL    |                |
-    | email    | varchar(100) | YES  | UNI | NULL    |                |
-    | password | varchar(100) | YES  |     | NULL    |                |
-    | status   | char(1)      | YES  |     | I       |                |
-    +----------+--------------+------+-----+---------+----------------+
-    7 rows in set (0.03 sec)    
-</pre>
-<p>ii)if you are using this method you need to add each value for the table</p>
-<pre>
-mysql> INSERT INTO users
--> VALUES (NULL, 'sam', '1989-03-09', 'nyc', 'sam@gm.io', '1234', 'A');
-Query OK, 1 row affected (0.00 sec)
-
-mysql> select*from users;
-+----+-------+------------+-------+---------------+----------+--------+
-| id | name  | dob        | city  | email         | password | status |
-+----+-------+------------+-------+---------------+----------+--------+
-|  1 | ankit | 1994-01-12 | thane | ashinde@gm.io | abc      | A      |
-|  2 | sam   | 1989-03-09 | nyc   | sam@gm.io     | 1234     | A      |
-+----+-------+------------+-------+---------------+----------+--------+
-2 rows in set (0.00 sec)
-</pre>
-<p>as you can see i have added null for id whereas in type (i) we directly started with name</p>
-<p>now lets add one more data with type one for better understanding</p>
-<p>Example: (i) type</p>
-<pre>
-mysql> INSERT INTO users (name, dob, city, email, password)
--> VALUES ('john', '2012-12-01', 'las vagas', 'john@gm.io', 'john321');
-Query OK, 1 row affected (0.00 sec)
-
-mysql> select * from users;
-+----+-------+------------+-----------+---------------+----------+--------+
-| id | name  | dob        | city      | email         | password | status |
-+----+-------+------------+-----------+---------------+----------+--------+
-|  1 | ankit | 1994-01-12 | thane     | ashinde@gm.io | abc      | A      |
-|  2 | sam   | 1989-03-09 | nyc       | sam@gm.io     | 1234     | A      |
-|  3 | john  | 2012-12-01 | las vagas | john@gm.io    | john321  | I      |
-+----+-------+------------+-----------+---------------+----------+--------+
-3 rows in set (0.00 sec)
-
-</pre>
-<p>i dint add id and status then to it has accepted the values</p>
-<hr>
-<p>Example: (ii) type</p>
-<pre>
-mysql>  insert into users values ("rao","1988-01-12","thane","rao@gm.io","123rao");
-ERROR 1136 (21S01): Column count doesn't match value count at row 1
-mysql>
-</pre>
-
-<p>lets add proper values</p>
-<pre>
-    mysql> insert into users values("","rao","1988-01-12","thane","rao@gm.io","rao123","I");
-    Query OK, 1 row affected, 1 warning (0.00 sec)
-    
-    mysql> SHOW WARNINGS;
-    +---------+------+------------------------------------------------------+
-    | Level   | Code | Message                                              |
-    +---------+------+------------------------------------------------------+
-    | Warning | 1366 | Incorrect integer value: '' for column 'id' at row 1 |
-    +---------+------+------------------------------------------------------+
-    1 row in set (0.00 sec)
-    
-    mysql>
-
-    mysql> select*from users;
+    mysql> select * from users;
     +----+-------+------------+-----------+---------------+----------+--------+
     | id | name  | dob        | city      | email         | password | status |
     +----+-------+------------+-----------+---------------+----------+--------+
     |  1 | ankit | 1994-01-12 | thane     | ashinde@gm.io | abc      | A      |
     |  2 | sam   | 1989-03-09 | nyc       | sam@gm.io     | 1234     | A      |
     |  3 | john  | 2012-12-01 | las vagas | john@gm.io    | john321  | I      |
-    |  4 | rao   | 1988-01-12 | thane     | rao@gm.io     | rao123   | I      |
+    |  5 | rao   | 1988-01-12 | thane     | rao@gm.io     | rao123   | I      |
+    +----+-------+------------+-----------+---------------+----------+--------+
+    4 rows in set (0.01 sec)   
+</pre>
+
+<p>Now i want to get all names and city</p>
+<pre>
+    mysql> select name,city from users;
+    +-------+-----------+
+    | name  | city      |
+    +-------+-----------+
+    | ankit | thane     |
+    | sam   | nyc       |
+    | john  | las vagas |
+    | rao   | thane     |
+    +-------+-----------+
+    4 rows in set (0.00 sec)
+    
+    mysql>
+</pre>
+
+<p>Lets update some data with update command</p>
+<p>syntax:</p>   
+<pre>
+    UPDATE table_name
+    SET column1 = value1, column2 = value2, ...
+    WHERE condition;  
+</pre> 
+<p>i want to upadte name,city of id 5</p>
+<pre>
+    mysql> update users set name="suraj",city="goa" where id=5;
+    Query OK, 1 row affected (0.01 sec)
+    Rows matched: 1  Changed: 1  Warnings: 0
+</pre>
+<pre>
+    mysql> select * from users;
+    +----+-------+------------+-----------+---------------+----------+--------+
+    | id | name  | dob        | city      | email         | password | status |
+    +----+-------+------------+-----------+---------------+----------+--------+
+    |  1 | ankit | 1994-01-12 | thane     | ashinde@gm.io | abc      | A      |
+    |  2 | sam   | 1989-03-09 | nyc       | sam@gm.io     | 1234     | A      |
+    |  3 | john  | 2012-12-01 | las vagas | john@gm.io    | john321  | I      |
+    |  5 | suraj | 1988-01-12 | goa       | rao@gm.io     | rao123   | I      |
     +----+-------+------------+-----------+---------------+----------+--------+
     4 rows in set (0.00 sec)
 </pre>
-<p>now i have added empty string for id then also it has accepted but some times it wont add and give this error</p>
-<p>it means pass empty string or null for (ii) type but add all values else it will throw error</p>
+
+<p>Now i want to update status</p>
+
+<pre>
+    mysql> update users set status="N" where status ="A";
+    Query OK, 2 rows affected (0.01 sec)
+    Rows matched: 2  Changed: 2  Warnings: 0
+
+    mysql> select * from users;
+    +----+-------+------------+-----------+--------+---------------+----------+
+    | id | name  | dob        | city      | email         | password | status | 
+    +----+-------+------------+-----------+--------+---------------+----------+
+    |  1 | ankit | 1994-01-12 | thane     | ashinde@gm.io | abc      | N      |
+    |  2 | sam   | 1989-03-09 | nyc       | sam@gm.io     | 1234     | N      |
+    |  3 | john  | 2012-12-01 | las vagas | john@gm.io    | john321  | I      |
+    |  5 | suraj | 1988-01-12 | goa       | rao@gm.io     | rao123   | I      |
+    +----+-------+------------+-----------+--------+---------------+----------+
+    4 rows in set (0.00 sec)
+</pre>
+
+<p>Now we will add column in our table</p>
+<p>Syntax:</p>
+<pre>
+    ALTER TABLE table_name
+    ADD COLUMN column_name column_definition;
+</pre>
+
+<pre>
+    mysql> alter table users add column salary bigint;
+    Query OK, 4 rows affected (0.10 sec)
+    Records: 4  Duplicates: 0  Warnings: 0
+</pre>
+
+<pre>
+    mysql> select * from users;
+    +----+-------+------------+-----------+---------------+----------+--------+--------+
+    | id | name  | dob        | city      | email         | password | status | salary |
+    +----+-------+------------+-----------+---------------+----------+--------+--------+
+    |  1 | ankit | 1994-01-12 | thane     | ashinde@gm.io | abc      | A      |   NULL |
+    |  2 | sam   | 1989-03-09 | nyc       | sam@gm.io     | 1234     | A      |   NULL |
+    |  3 | john  | 2012-12-01 | las vagas | john@gm.io    | john321  | I      |   NULL |
+    |  5 | suraj | 1988-01-12 | goa       | rao@gm.io     | rao123   | I      |   NULL |
+    +----+-------+------------+-----------+---------------+----------+--------+--------+
+    4 rows in set (0.00 sec)
+</pre>
+<p>you can also add column without column keyword</p>
+<pre>
+    mysql> alter table users add contact int(20);
+    Query OK, 4 rows affected, 1 warning (0.04 sec)
+    Records: 4  Duplicates: 0  Warnings: 1
+
+    mysql> show warnings;
+    +---------+------+------------------------------------------------------------------------------+
+    | Level   | Code | Message                                                                      |
+    +---------+------+------------------------------------------------------------------------------+
+    | Warning | 1681 | Integer display width is deprecated and will be removed in a future release. |
+    +---------+------+------------------------------------------------------------------------------+
+    1 row in set (0.00 sec)
+
+    mysql> select * from users;
+    +----+-------+------------+-----------+---------------+----------+--------+--------+---------+
+    | id | name  | dob        | city      | email         | password | status | salary | contact |
+    +----+-------+------------+-----------+---------------+----------+--------+--------+---------+
+    |  1 | ankit | 1994-01-12 | thane     | ashinde@gm.io | abc      | A      |   NULL |    NULL |
+    |  2 | sam   | 1989-03-09 | nyc       | sam@gm.io     | 1234     | A      |   NULL |    NULL |
+    |  3 | john  | 2012-12-01 | las vagas | john@gm.io    | john321  | I      |   NULL |    NULL |
+    |  5 | suraj | 1988-01-12 | goa       | rao@gm.io     | rao123   | I      |   NULL |    NULL |
+    +----+-------+------------+-----------+---------------+----------+--------+--------+---------+
+    4 rows in set (0.00 sec)
+</pre>
+<p>as u can see we are getting null for every new column entry</p>
+<p>to avoid null for every entry</p>
+<p>but lets drop the column and we will add new column again</p>
+<p>syntax:</p>
+<pre>
+    ALTER TABLE table_name
+    DROP COLUMN column_name;
+</pre>
+
+<pre>
+    mysql> alter table users drop contact;
+    Query OK, 4 rows affected (0.04 sec)
+    Records: 4  Duplicates: 0  Warnings: 0
+</pre>
+
+<p>i have skipped the keyword column its not manditory to type its up to you</p>
+<p>lets fetch and see it worked or not?</p>
+<pre>
+    mysql> select * from users;
+    +----+-------+------------+-----------+---------------+----------+--------+--------+
+    | id | name  | dob        | city      | email         | password | status | salary |
+    +----+-------+------------+-----------+---------------+----------+--------+--------+
+    |  1 | ankit | 1994-01-12 | thane     | ashinde@gm.io | abc      | A      |   NULL |
+    |  2 | sam   | 1989-03-09 | nyc       | sam@gm.io     | 1234     | A      |   NULL |
+    |  3 | john  | 2012-12-01 | las vagas | john@gm.io    | john321  | I      |   NULL |
+    |  5 | suraj | 1988-01-12 | goa       | rao@gm.io     | rao123   | I      |   NULL |
+    +----+-------+------------+-----------+---------------+----------+--------+--------+
+    4 rows in set (0.00 sec)
+</pre>
+
+<p>as you can see column is deleted</p>
+<p>now lets add column again but not with null values</p>
+<pre>
+    mysql> alter table users add column contact int not null default 0;
+    Query OK, 4 rows affected (0.04 sec)
+    Records: 4  Duplicates: 0  Warnings: 0
+</pre>
+
+<pre>
+    mysql> select * from users;
+    +----+-------+------------+-----------+---------------+----------+--------+--------+---------+
+    | id | name  | dob        | city      | email         | password | status | salary | contact |
+    +----+-------+------------+-----------+---------------+----------+--------+--------+---------+
+    |  1 | ankit | 1994-01-12 | thane     | ashinde@gm.io | abc      | A      |   NULL |       0 |
+    |  2 | sam   | 1989-03-09 | nyc       | sam@gm.io     | 1234     | A      |   NULL |       0 |
+    |  3 | john  | 2012-12-01 | las vagas | john@gm.io    | john321  | I      |   NULL |       0 |
+    |  5 | suraj | 1988-01-12 | goa       | rao@gm.io     | rao123   | I      |   NULL |       0 |
+    +----+-------+------------+-----------+---------------+----------+--------+--------+---------+
+    4 rows in set (0.00 sec)
+</pre>
+<p>As all contact column is 0</p>
+
+<p>i am dropping salary & later i will add it</p>
+<pre>
+    mysql> alter table users drop salary;
+    Query OK, 4 rows affected (0.04 sec)
+    Records: 4  Duplicates: 0  Warnings: 0
+
+    mysql> select * from users;
+    +----+-------+------------+-----------+---------------+----------+--------+---------+
+    | id | name  | dob        | city      | email         | password | status | contact |
+    +----+-------+------------+-----------+---------------+----------+--------+---------+
+    |  1 | ankit | 1994-01-12 | thane     | ashinde@gm.io | abc      | A      |       0 |
+    |  2 | sam   | 1989-03-09 | nyc       | sam@gm.io     | 1234     | A      |       0 |
+    |  3 | john  | 2012-12-01 | las vagas | john@gm.io    | john321  | I      |       0 |
+    |  5 | suraj | 1988-01-12 | goa       | rao@gm.io     | rao123   | I      |       0 |
+    +----+-------+------------+-----------+---------------+----------+--------+---------+
+    4 rows in set (0.00 sec)
+</pre>
+
+<p>Now i will add salary but this time i want to add it at specific position</p>
+<p>lets add after city</p>
+<p>syntax:</p>
+<pre>
+    ALTER TABLE table_name
+    ADD COLUMN new_column_name column_definition AFTER existing_column_name;
+</pre>
+
+<pre>
+    mysql> alter table users add salary bigint not null default 10000 after city;
+    Query OK, 4 rows affected (0.03 sec)
+    Records: 4  Duplicates: 0  Warnings: 0
+
+    mysql> select * from users;
+    +----+-------+------------+-----------+--------+---------------+----------+--------+---------+
+    | id | name  | dob        | city      | salary | email         | password | status | contact |
+    +----+-------+------------+-----------+--------+---------------+----------+--------+---------+
+    |  1 | ankit | 1994-01-12 | thane     |  10000 | ashinde@gm.io | abc      | A      |       0 |
+    |  2 | sam   | 1989-03-09 | nyc       |  10000 | sam@gm.io     | 1234     | A      |       0 |
+    |  3 | john  | 2012-12-01 | las vagas |  10000 | john@gm.io    | john321  | I      |       0 |
+    |  5 | suraj | 1988-01-12 | goa       |  10000 | rao@gm.io     | rao123   | I      |       0 |
+    +----+-------+------------+-----------+--------+---------------+----------+--------+---------+
+    4 rows in set (0.00 sec)
+</pre>
+<p>in above i have added default value to avoid null</p>
     <!-- Print button -->
 <!--     <button onclick="window.print()">Print</button> -->
 
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
           <li class="page-item">
-            <a class="page-link" href="#" aria-label="Previous">
+            <a class="page-link" href="index.html" aria-label="Previous">
               <span aria-hidden="true">&laquo;</span>
             </a>
           </li>
-          <li class="page-item"><a class="page-link" href="sqlCommands.html">1</a></li>
-          <li class="page-item active"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="index.html">1</a></li>
+          <li class="page-item active"><a class="page-link" href="Commands2.html">2</a></li>
           <li class="page-item"><a class="page-link" href="#">3</a></li>
           <li class="page-item">
             <a class="page-link" href="#" aria-label="Next">
