@@ -1,0 +1,565 @@
+run xampp start apache and start MySQL
+after starting go to shell
+login with below query
+mysql -u root -p
+in my office password, password is empty just enter 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+you will get welcome text
+
+dont get confuse it is MariaDB, it means MariaDB ne mySql kharid liya hai in the old version it is mysql 
+
+MariaDB [(none)]> this means u r login
+ 
+*note:-dont forget to end with semicolon if u forget it will print -> this symbol
+MariaDB [(none)]>show databases
+      -> type (semicolon);
+
+| Database               |
++------------------------+
+| ankitdb                |
+| information_schema     |
+| mysql                  |
+| performance_schema     |
+| php-db                 |
+| phpmyadmin             |
+| quickexperttopics_done |
+| test                   |
+| wordpress              |
+| wordpress2
+
+u will get output like above
+
+how to create new database
+MariaDB [(none)]>create database DatabaseName
+
+MariaDB [(none)]> create database newsqldb;
+Query OK, 1 row affected (0.004 sec)
+
+how to use newsqldb
+MariaDB [(none)]> use newsqldb;
+Database changed
+MariaDB [newsqldb]>
+
+suppose in ur db there is table or not how to check that?
+mysql>show tables
+MariaDB [newsqldb]> show tables;
+Empty set (0.001 sec)
+
+go and add some table after adding values
+
+MariaDB [newsqldb]> show tables;
++--------------------+
+| Tables_in_newsqldb |
++--------------------+
+| school             |
++--------------------+
+1 row in set (0.001 sec)
+
+now i want the structure of tables means what are values,what are types,what are special values all i want to know
+
+MariaDB [newsqldb]> desc school;
++---------+-------------+------+-----+---------+----------------+
+| Field   | Type        | Null | Key | Default | Extra          |
++---------+-------------+------+-----+---------+----------------+
+| sno     | int(11)     | NO   | PRI | NULL    | auto_increment |
+| name    | varchar(11) | NO   |     | NULL    |                |
+| pincode | int(10)     | NO   |     | NULL    |                |
+| contact | int(11)     | NO   |     | NULL    |                |
++---------+-------------+------+-----+---------+----------------+
+4 rows in set (0.019 sec)
+
+MariaDB [newsqldb]>
+
+lets create new table
+MariaDB [newsqldb]> create table users(id int(9)primary key auto_increment,name varchar(100)not null,dob date,city varchar(100),email varchar(100) unique,password varchar(100),status char(1) default "I");
+Query OK, 0 rows affected (0.183 sec)
+
+status means user is activate or in activate for that we use "A" for active & "I" inactive.
+
+MariaDB [newsqldb]> show tables;
++--------------------+
+| Tables_in_newsqldb |
++--------------------+
+| school             |
+| users              |
++--------------------+
+2 rows in set (0.001 sec)
+
+MariaDB [newsqldb]> desc users;
++----------+--------------+------+-----+---------+----------------+
+| Field    | Type         | Null | Key | Default | Extra          |
++----------+--------------+------+-----+---------+----------------+
+| id       | int(9)       | NO   | PRI | NULL    | auto_increment |
+| name     | varchar(100) | NO   |     | NULL    |                |
+| dob      | date         | YES  |     | NULL    |                |
+| city     | varchar(100) | YES  |     | NULL    |                |
+| email    | varchar(100) | YES  | UNI | NULL    |                |
+| password | varchar(100) | YES  |     | NULL    |                |
+| status   | char(1)      | YES  |     | I       |                |
++----------+--------------+------+-----+---------+----------------+
+7 rows in set (0.028 sec)
+
+how to insert values in tables?
+means kis column mai konsi value add karni hai
+
+INSERT INTO table_name (column1, column2, column3, ...)
+VALUES (value1, value2, value3, ...);
+
+*note just see the above table according that u need to insert values for eg:
+suppose in table name,dob is sequence and while inserting u gave dob,name it will give error
+
+MariaDB [newsqldb]> insert into users (name,dob,city,email,password,status) values("ankit","01-12-1994","thane","ashinde@gm.io","abc","A");
+
+Query OK, 1 row affected, 1 warning (0.100 sec)
+
+suppose in table there is status and you dint insert status then u will get error
+MariaDB [newsqldb]> insert into users (name,dob,city,email,password,status) values("sam","06-05-2001","mulund","abc@gm.io","abc");
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+so give values whatever u define in table
+
+one more query to insert values in table that is
+MariaDB [newsqldb]> insert into school values("null","suraj",400605,892881837);
+Query OK, 1 row affected, 1 warning (0.105 sec)
+
+MariaDB [newsqldb]> select * from school; // to get all values of tables
++-----+-------+---------+-----------+
+| sno | name  | pincode | contact   |
++-----+-------+---------+-----------+
+|   1 | suraj |  400605 | 892881837 |
++-----+-------+---------+-----------+
+1 row in set (0.000 sec)
+
+suppose i want name and pinode?
+
+MariaDB [newsqldb]> select name,pincode from school;
++-------+---------+
+| name  | pincode |
++-------+---------+
+| suraj |  400605 |
++-------+---------+
+1 row in set (0.000 sec)
+
+how to update ?
+MariaDB [newsqldb]> select * from users;
++----+-------+------------+--------+---------------+----------+--------+
+| id | name  | dob        | city   | email         | password | status |
++----+-------+------------+--------+---------------+----------+--------+
+|  1 | ankit | 0000-00-00 | thane  | ashinde@gm.io | abc      | A      |
+|  2 | rohit | 0000-00-00 | mulund | abc@gm.io     | abc      | A      |
+|  4 | sam   | 0000-00-00 | thane  | ash@gm.io     | abc      | I      |
++----+-------+------------+--------+---------------+----------+--------+
+3 rows in set (0.001 sec)
+
+in above suppose i want to update rohit name and status A to I
+MariaDB [newsqldb]> update users set name="shubham",status="I" WHERE id =2;
+Query OK, 1 row affected (0.094 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [newsqldb]> select * from users;
++----+---------+------------+--------+---------------+----------+--------+
+| id | name    | dob        | city   | email         | password | status |
++----+---------+------------+--------+---------------+----------+--------+
+|  1 | ankit   | 0000-00-00 | thane  | ashinde@gm.io | abc      | A      |
+|  2 | shubham | 0000-00-00 | mulund | abc@gm.io     | abc      | I      |
+|  4 | sam     | 0000-00-00 | thane  | ash@gm.io     | abc      | I      |
++----+---------+------------+--------+---------------+----------+--------+
+3 rows in set (0.000 sec)
+
+if u want to check where all your data are stored 
+go to C:\xampp\mysql\data\newsqldb here u will see all data
+
+suppose u want to export ur sql then simply go to export in phpmyadmin select ur db and export
+
+now suppose i want to delete 1 row without affecting its structure
+MariaDB [newsqldb]> delete from users WHERE id =2; // if u skipped where id =2 it will delete whole rows;
+Query OK, 1 row affected (0.103 sec)
+
+MariaDB [newsqldb]> select * from users;
++----+-------+------------+-------+---------------+----------+--------+
+| id | name  | dob        | city  | email         | password | status |
++----+-------+------------+-------+---------------+----------+--------+
+|  1 | ankit | 0000-00-00 | thane | ashinde@gm.io | abc      | A      |
+|  4 | sam   | 0000-00-00 | thane | ash@gm.io     | abc      | I      |
++----+-------+------------+-------+---------------+----------+--------+
+2 rows in set (0.000 sec)
+
+now i want add,delete,modify columns in table then it can be done using ALTER
+MariaDB [newsqldb]> alter table users add salary bigint;
+Query OK, 0 rows affected (0.132 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [newsqldb]> select * from users;
++----+-------+------------+-------+---------------+----------+--------+--------+
+| id | name  | dob        | city  | email         | password | status | salary |
++----+-------+------------+-------+---------------+----------+--------+--------+
+|  1 | ankit | 0000-00-00 | thane | ashinde@gm.io | abc      | A      |   NULL |
+|  4 | sam   | 0000-00-00 | thane | ash@gm.io     | abc      | I      |   NULL |
++----+-------+------------+-------+---------------+----------+--------+--------+
+2 rows in set (0.000 sec)
+
+now i want to delete column for that use DROP
+MariaDB [newsqldb]> alter table users drop column salary;
+Query OK, 0 rows affected (0.168 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [newsqldb]> select * from users;
++----+-------+------------+-------+---------------+----------+--------+
+| id | name  | dob        | city  | email         | password | status |
++----+-------+------------+-------+---------------+----------+--------+
+|  1 | ankit | 0000-00-00 | thane | ashinde@gm.io | abc      | A      |
+|  4 | sam   | 0000-00-00 | thane | ash@gm.io     | abc      | I      |
++----+-------+------------+-------+---------------+----------+--------+
+2 rows in set (0.000 sec)
+
+
+again i added salary to add default value later on
+MariaDB [newsqldb]> alter table users add salary bigint; // add means defining column to add salary column
+Query OK, 0 rows affected (0.268 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [newsqldb]> select * from users;
++----+-------+------------+-------+---------------+----------+--------+--------+
+| id | name  | dob        | city  | email         | password | status | salary |
++----+-------+------------+-------+---------------+----------+--------+--------+
+|  1 | ankit | 0000-00-00 | thane | ashinde@gm.io | abc      | A      |   NULL |
+|  4 | sam   | 0000-00-00 | thane | ash@gm.io     | abc      | I      |   NULL |
++----+-------+------------+-------+---------------+----------+--------+--------+
+2 rows in set (0.001 sec)
+
+how to add default value
+
+MariaDB [newsqldb]> alter table users modify salary bigint not null default 10000; // add not null bcoz i added salary not null
+Query OK, 0 rows affected, 2 warnings (1.169 sec)
+Records: 0  Duplicates: 0  Warnings: 2
+
+MariaDB [newsqldb]> select * from users;
++----+-------+------------+-------+---------------+----------+--------+--------+
+| id | name  | dob        | city  | email         | password | status | salary |
++----+-------+------------+-------+---------------+----------+--------+--------+
+|  1 | ankit | 0000-00-00 | thane | ashinde@gm.io | abc      | A      |  10000 |
+|  4 | sam   | 0000-00-00 | thane | ash@gm.io     | abc      | I      |  10000 |
++----+-------+------------+-------+---------------+----------+--------+--------+
+2 rows in set (0.000 sec)
+
+suppose i want to get only status "A" from table
+
+MariaDB [newsqldb]> select * from users where status = "A";
++----+-------+------------+-------+---------------+----------+--------+--------+
+| id | name  | dob        | city  | email         | password | status | salary |
++----+-------+------------+-------+---------------+----------+--------+--------+
+|  1 | ankit | 0000-00-00 | thane | ashinde@gm.io | abc      | A      |  10000 |
++----+-------+------------+-------+---------------+----------+--------+--------+
+1 row in set (0.001 sec)
+
+how to rename table?
+RENAME TABLE old_tablenname TO new_tablename
+
+MariaDB [newsqldb]> rename table school TO college;
+Query OK, 0 rows affected (0.138 sec)
+MariaDB [newsqldb]> select * from college;
++-----+-------+---------+-----------+
+| sno | name  | pincode | contact   |
++-----+-------+---------+-----------+
+|   1 | suraj |  400605 | 892881837 |
++-----+-------+---------+-----------+
+1 row in set (0.005 sec)
+
+---------------------Operators----------------------------------------------------
+=	Equal	
+>	Greater than	
+<	Less than	
+>=	Greater than or equal	
+<=	Less than or equal	
+<>	Not equal. Note: In some versions of SQL this operator may be written as !=	
+BETWEEN	Between a certain range	
+IN	To specify multiple possible values for a column
+
+---Not Equal to --> !=
+MariaDB [newsqldb]> select * from users;
++----+-------+------------+--------+---------------+----------+--------+--------+
+| id | name  | dob        | city   | email         | password | status | salary |
++----+-------+------------+--------+---------------+----------+--------+--------+
+|  1 | ankit | 0000-00-00 | thane  | ashinde@gm.io | abc      | A      |  10000 |
+|  4 | sam   | 0000-00-00 | thane  | ash@gm.io     | abc      | I      |  20000 |
+|  5 | john  | 2014-07-01 | mumbai | john@12.io    | 1234     | I      |  30000 |
+|  6 | ruby  | 2014-07-01 | nyc    | ruby@90.io    | ruby@01  | I      |  40000 |
++----+-------+------------+--------+---------------+----------+--------+--------+
+
+MariaDB [newsqldb]> select * from users where status !="I";
++----+-------+------------+-------+---------------+----------+--------+--------+
+| id | name  | dob        | city  | email         | password | status | salary |
++----+-------+------------+-------+---------------+----------+--------+--------+
+|  1 | ankit | 0000-00-00 | thane | ashinde@gm.io | abc      | A      |  10000 |
++----+-------+------------+-------+---------------+----------+--------+--------+
+
+---Not Equal to --> <>
+MariaDB [newsqldb]> select * from users where status <>"I";
++----+-------+------------+-------+---------------+----------+--------+--------+
+| id | name  | dob        | city  | email         | password | status | salary |
++----+-------+------------+-------+---------------+----------+--------+--------+
+|  1 | ankit | 0000-00-00 | thane | ashinde@gm.io | abc      | A      |  10000 |
++----+-------+------------+-------+---------------+----------+--------+--------+
+
+---Equal to --> =
+
+MariaDB [newsqldb]> select * from users where status ="I";
++----+------+------------+--------+------------+----------+--------+--------+
+| id | name | dob        | city   | email      | password | status | salary |
++----+------+------------+--------+------------+----------+--------+--------+
+|  4 | sam  | 0000-00-00 | thane  | ash@gm.io  | abc      | I      |  20000 |
+|  5 | john | 2014-07-01 | mumbai | john@12.io | 1234     | I      |  30000 |
+|  6 | ruby | 2014-07-01 | nyc    | ruby@90.io | ruby@01  | I      |  40000 |
++----+------+------------+--------+------------+----------+--------+--------+
+
+---BETWEEN--> Between a certain range
+suppose i want salary between 20000 - 30000 ?
+
+MariaDB [newsqldb]> select * from users where salary between 20000 and 30000;
++----+------+------------+--------+------------+----------+--------+--------+
+| id | name | dob        | city   | email      | password | status | salary |
++----+------+------------+--------+------------+----------+--------+--------+
+|  4 | sam  | 0000-00-00 | thane  | ash@gm.io  | abc      | I      |  20000 |
+|  5 | john | 2014-07-01 | mumbai | john@12.io | 1234     | I      |  30000 |
++----+------+------------+--------+------------+----------+--------+--------+
+
+---IN --->	To specify multiple possible values for a column
+column k andar multiple possibilities
+
+MariaDB [newsqldb]> select * from users where id in(1,5,6); // all id's with 1,5,6
++----+-------+------------+--------+---------------+----------+--------+--------+
+| id | name  | dob        | city   | email         | password | status | salary |
++----+-------+------------+--------+---------------+----------+--------+--------+
+|  1 | ankit | 0000-00-00 | thane  | ashinde@gm.io | abc      | A      |  10000 |
+|  5 | john  | 2014-07-01 | mumbai | john@12.io    | 1234     | I      |  30000 |
+|  6 | ruby  | 2014-07-01 | nyc    | ruby@90.io    | ruby@01  | I      |  40000 |
++----+-------+------------+--------+---------------+----------+--------+--------+
+
+now i dont want id i want names?
+
+MariaDB [newsqldb]> select * from users where name in("sam","john","ruby");
++----+------+------------+--------+------------+----------+--------+--------+
+| id | name | dob        | city   | email      | password | status | salary |
++----+------+------------+--------+------------+----------+--------+--------+
+|  4 | sam  | 0000-00-00 | thane  | ash@gm.io  | abc      | I      |  20000 |
+|  5 | john | 2014-07-01 | mumbai | john@12.io | 1234     | I      |  30000 |
+|  6 | ruby | 2014-07-01 | nyc    | ruby@90.io | ruby@01  | I      |  40000 |
++----+------+------------+--------+------------+----------+--------+--------+
+
+-------------------------------------------------------------------------------------------------
+AND, OR and NOT
+
+--AND is like if else statement
+
+--AND --> T T = T then only u will get output if one of it is F T OR TF then it will say empty set
+select * from users where city="nyc" AND status="A";'
+Empty set (0.001 sec)
+
+so correct query is 
+MariaDB [newsqldb]> select * from users where city="thane" AND status="A";
++----+-------+------------+-------+---------------+----------+--------+--------+--------+
+| id | name  | dob        | city  | email         | password | status | salary | bonous |
++----+-------+------------+-------+---------------+----------+--------+--------+--------+
+|  1 | ankit | 0000-00-00 | thane | ashinde@gm.io | abc      | A      |  10000 |  50000 |
++----+-------+------------+-------+---------------+----------+--------+--------+--------+
+1 row in set (0.001 sec)
+
+--OR -- One should by T
+MariaDB [newsqldb]> select * from users where city="nyc" or status="I";
++----+------+------------+--------+------------+----------+--------+--------+--------+
+| id | name | dob        | city   | email      | password | status | salary | bonous |
++----+------+------------+--------+------------+----------+--------+--------+--------+
+|  4 | sam  | 0000-00-00 | thane  | ash@gm.io  | abc      | I      |  20000 |   3000 |
+|  5 | john | 2014-07-01 | mumbai | john@12.io | 1234     | I      |  30000 |   5000 |
+|  6 | ruby | 2014-07-01 | nyc    | ruby@90.io | ruby@01  | I      |  40000 |   5000 |
++----+------+------------+--------+------------+----------+--------+--------+--------+
+3 rows in set (0.001 sec)
+
+it displays all I values
+
+--NOT ---> true ka false , false ka true
+MariaDB [newsqldb]> select * from users where not status="A"; // A ko chod k sab values print hue
++----+------+------------+--------+------------+----------+--------+--------+--------+
+| id | name | dob        | city   | email      | password | status | salary | bonous |
++----+------+------------+--------+------------+----------+--------+--------+--------+
+|  4 | sam  | 0000-00-00 | thane  | ash@gm.io  | abc      | I      |  20000 |   3000 |
+|  5 | john | 2014-07-01 | mumbai | john@12.io | 1234     | I      |  30000 |   5000 |
+|  6 | ruby | 2014-07-01 | nyc    | ruby@90.io | ruby@01  | I      |  40000 |   5000 |
++----+------+------------+--------+------------+----------+--------+--------+--------+
+3 rows in set (0.001 sec)
+
+--------------------------------------------------------------------------
+ -----------------CLAUSE---------------------
+
+SELECT column1, column2, ...
+FROM table_name
+WHERE columnN LIKE pattern;
+
+WHERE CustomerName LIKE 'a%'	Finds any values that start with "a"
+WHERE CustomerName LIKE '%a'	Finds any values that end with "a"
+WHERE CustomerName LIKE '%or%'	Finds any values that have "or" in any position
+WHERE CustomerName LIKE '_r%'	Finds any values that have "r" in the second position
+WHERE CustomerName LIKE 'a_%'	Finds any values that start with "a" and are at least 2 characters in length
+WHERE CustomerName LIKE 'a__%'	Finds any values that start with "a" and are at least 3 characters in length
+WHERE ContactName LIKE 'a%o'	Finds any values that start with "a" and ends with "o"
+
+
+start with only s letter
+MariaDB [newsqldb]> select * from users where name like "s%";
++----+--------+------------+-----------+-----------+----------+--------+--------+--------+
+| id | name   | dob        | city      | email     | password | status | salary | bonous |
++----+--------+------------+-----------+-----------+----------+--------+--------+--------+
+|  4 | sam    | 0000-00-00 | thane     | ash@gm.io | abc      | I      |  20000 |   3000 |
+|  7 | simran | 0000-00-00 | dombivali | sim@12.io | 1234     | A      | 700000 |   5000 |
++----+--------+------------+-----------+-----------+----------+--------+--------+--------+
+2 rows in set (0.001 sec)
+
+email ends with .io
+MariaDB [newsqldb]> select * from users where email like "%.io";
++----+--------+------------+-----------+---------------+----------+--------+--------+--------+
+| id | name   | dob        | city      | email         | password | status | salary | bonous |
++----+--------+------------+-----------+---------------+----------+--------+--------+--------+
+|  1 | ankit  | 0000-00-00 | thane     | ashinde@gm.io | abc      | A      |  10000 |  50000 |
+|  4 | sam    | 0000-00-00 | thane     | ash@gm.io     | abc      | I      |  20000 |   3000 |
+|  5 | john   | 2014-07-01 | mumbai    | john@12.io    | 1234     | I      |  30000 |   5000 |
+|  6 | ruby   | 2014-07-01 | nyc       | ruby@90.io    | ruby@01  | I      |  40000 |   5000 |
+|  7 | simran | 0000-00-00 | dombivali | sim@12.io     | 1234     | A      | 700000 |   5000 |
++----+--------+------------+-----------+---------------+----------+--------+--------+--------+
+5 rows in set (0.000 sec)
+
+
+name ends with n
+MariaDB [newsqldb]> select * from users where name like "%n";
++----+--------+------------+-----------+------------+----------+--------+--------+--------+
+| id | name   | dob        | city      | email      | password | status | salary | bonous |
++----+--------+------------+-----------+------------+----------+--------+--------+--------+
+|  5 | john   | 2014-07-01 | mumbai    | john@12.io | 1234     | I      |  30000 |   5000 |
+|  7 | simran | 0000-00-00 | dombivali | sim@12.io  | 1234     | A      | 700000 |   5000 |
++----+--------+------------+-----------+------------+----------+--------+--------+--------+
+2 rows in set (0.001 sec)
+
+'%value%' finds in middle
+MariaDB [newsqldb]> select * from users where name like "%h%";
+finds middle letter of h
++----+------+------------+--------+------------+----------+--------+--------+--------+
+| id | name | dob        | city   | email      | password | status | salary | bonous |
++----+------+------------+--------+------------+----------+--------+--------+--------+
+|  5 | john | 2014-07-01 | mumbai | john@12.io | 1234     | I      |  30000 |   5000 |
++----+------+------------+--------+------------+----------+--------+--------+--------+
+1 row in set (0.001 sec)
+
+a_% --> atleast second position pe kuch na kuch to hona chaiye
+below o/p second position is a therefor it printed sam
+MariaDB [newsqldb]> select * from users where name like "_a%";
++----+------+------------+-------+-----------+----------+--------+--------+--------+
+| id | name | dob        | city  | email     | password | status | salary | bonous |
++----+------+------------+-------+-----------+----------+--------+--------+--------+
+|  4 | sam  | 0000-00-00 | thane | ash@gm.io | abc      | I      |  20000 |   3000 |
++----+------+------------+-------+-----------+----------+--------+--------+--------+
+1 row in set (0.001 sec)
+
+a_% starts with a atleat take 2character
+MariaDB [newsqldb]> select * from users where city like "t_%";
+starts with t and 2 thane data
++----+-------+------------+-------+---------------+----------+--------+--------+--------+
+| id | name  | dob        | city  | email         | password | status | salary | bonous |
++----+-------+------------+-------+---------------+----------+--------+--------+--------+
+|  1 | ankit | 0000-00-00 | thane | ashinde@gm.io | abc      | A      |  10000 |  50000 |
+|  4 | sam   | 0000-00-00 | thane | ash@gm.io     | abc      | I      |  20000 |   3000 |
++----+-------+------------+-------+---------------+----------+--------+--------+--------+
+2 rows in set (0.000 sec)
+
+you can use LIKE in search,filter etc
+
+--ORDER By
+The ORDER BY keyword is used to sort the result-set in ascending or descending order.
+
+SELECT column1, column2, ...
+FROM table_name
+ORDER BY column1, column2, ... ASC|DESC;
+
+MariaDB [newsqldb]> select * from users where 1=1 order by name;
+1=1 means settig true and by default it is in ascending
+you can order by name city dob ur choice.
++----+--------+------------+-----------+---------------+----------+--------+--------+--------+
+| id | name   | dob        | city      | email         | password | status | salary | bonous |
++----+--------+------------+-----------+---------------+----------+--------+--------+--------+
+|  1 | ankit  | 0000-00-00 | thane     | ashinde@gm.io | abc      | A      |  10000 |  50000 |
+|  5 | john   | 2014-07-01 | mumbai    | john@12.io    | 1234     | I      |  30000 |   5000 |
+|  6 | ruby   | 2014-07-01 | nyc       | ruby@90.io    | ruby@01  | I      |  40000 |   5000 |
+|  4 | sam    | 0000-00-00 | thane     | ash@gm.io     | abc      | I      |  20000 |   3000 |
+|  7 | simran | 0000-00-00 | dombivali | sim@12.io     | 1234     | A      | 700000 |   5000 |
++----+--------+------------+-----------+---------------+----------+--------+--------+--------+
+5 rows in set (0.001 sec)
+
+this is in descending order
+MariaDB [newsqldb]> select * from users where 1=1 order by name desc;
++----+--------+------------+-----------+---------------+----------+--------+--------+--------+
+| id | name   | dob        | city      | email         | password | status | salary | bonous |
++----+--------+------------+-----------+---------------+----------+--------+--------+--------+
+|  7 | simran | 0000-00-00 | dombivali | sim@12.io     | 1234     | A      | 700000 |   5000 |
+|  4 | sam    | 0000-00-00 | thane     | ash@gm.io     | abc      | I      |  20000 |   3000 |
+|  6 | ruby   | 2014-07-01 | nyc       | ruby@90.io    | ruby@01  | I      |  40000 |   5000 |
+|  5 | john   | 2014-07-01 | mumbai    | john@12.io    | 1234     | I      |  30000 |   5000 |
+|  1 | ankit  | 0000-00-00 | thane     | ashinde@gm.io | abc      | A      |  10000 |  50000 |
++----+--------+------------+-----------+---------------+----------+--------+--------+--------+
+5 rows in set (0.000 sec)
+
+
+-----------------------------------------------------------------------------------------------------------------
+alter table modify
+It changes the datatype
+MariaDB [products_one]> alter table users modify column dob int;
+Query OK, 3 rows affected (2.736 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+MariaDB [products_one]> select*from users;
++----+---------+----------+------------+-------------+----------+--------+--------+
+| id | name    | dob      | city       | email       | password | status | salary |
++----+---------+----------+------------+-------------+----------+--------+--------+
+|  1 | aman    | 20040112 | nyc        | aman@89.op  | 1234     | A      |  10000 |
+|  2 | anita   | 20240112 | california | anita@89.op | ani@123  | I      |  10000 |
+|  3 | sharukh |        0 | nyc        | sumit@67.op | 1234     | A      |  10000 |
++----+---------+----------+------------+-------------+----------+--------+--------+
+3 rows in set (0.001 sec)
+-----------------------------------------------------------------------------------------------------------------
+
+You can delete a table using the DROP TABLE command, 
+but be careful because it completely erases both data and the table's structure from the database. 
+If you want to store some data again, you would need to re-create this table once again.
+
+TRUNCATE TABLE table_name
+to use truncate 1st create one table bcoz it will delete all your record from table
+
+CREATE TABLE CUSTOMERS (
+   ID INT NOT NULL,
+   NAME VARCHAR(20) NOT NULL,
+   AGE INT NOT NULL,
+   ADDRESS CHAR (25),
+   SALARY DECIMAL (18, 2),
+   PRIMARY KEY (ID)
+);
+
+INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY) VALUES 
+(1, 'Ram', 32, 'Ahmedabad', 20000),
+(2, 'Sam', 25, 'Delhi', 15000 ),
+(3, 'Simran', 23, 'Kota', 20000 ),
+(4, 'John', 25, 'Mumbai', 65000 ),
+(5, 'Hardik', 27, 'Bhopal', 85000)
+
+SELECT * FROM CUSTOMERS;
+
+DELETE:
+The DELETE command removes one or more rows, 
+from a table based on the conditions specified in a WHERE Clause.
+delete multiple rows: DELETE FROM customers WHERE id IN (1, 3, 5);
+It is a DML(Data Manipulation Language) command.
+DML commands come in the following types: SELECT, INSERT, UPDATE, & DELETE.
+
+
+
+TRUNCATE:
+The TRUNCATE command is used to remove all, 
+of the rows from a table, regardless of whether or not any conditions are met.
+It is a DDL(Data Definition Language) command.
+DDL commands come in the following types: CREATE, ALTER, DROP, RENAME, and TRUNCATE.
