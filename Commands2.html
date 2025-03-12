@@ -79,15 +79,13 @@ DML(Data Manipulation Language) command.
 DML commands come in the following types: SELECT, INSERT, UPDATE, & DELETE.
 
 In This we will lern:
-1)SELECT
-2)UPDATE
-3)ALTER
-4)DROP
-
-DDL(Data Definition Language) command.
-DDL commands come in the following types: CREATE, ALTER, DROP, RENAME, and TRUNCATE.
+1)SELECT  -- > (Data Manipulation Language) command.
+2)UPDATE  -- > (Data Manipulation Language) command.
+3)ALTER  -- >  (Data Definition Language) command.
+4)DROP  -- >   (Data Definition Language) command.
+5)INSERT  -- > (Data Manipulation Language) command.
+6)DELETE  -- > (Data Manipulation Language) command.
     </pre>
-    <h3>To create table in Xampp or wampp</h3>
     <p>i) Log in to wampp or xampp</p>
     <p>ii) I am using wampp </p>
     <p>my password is empty</p>
@@ -227,8 +225,8 @@ mysql>
     +----+-------+------------+-----------+---------------+----------+--------+--------+
     | id | name  | dob        | city      | email         | password | status | salary |
     +----+-------+------------+-----------+---------------+----------+--------+--------+
-    |  1 | ankit | 1994-01-12 | thane     | ashinde@gm.io | abc      | A      |   NULL |
-    |  2 | sam   | 1989-03-09 | nyc       | sam@gm.io     | 1234     | A      |   NULL |
+    |  1 | ankit | 1994-01-12 | thane     | ashinde@gm.io | abc      | N      |   NULL |
+    |  2 | sam   | 1989-03-09 | nyc       | sam@gm.io     | 1234     | N      |   NULL |
     |  3 | john  | 2012-12-01 | las vagas | john@gm.io    | john321  | I      |   NULL |
     |  5 | suraj | 1988-01-12 | goa       | rao@gm.io     | rao123   | I      |   NULL |
     +----+-------+------------+-----------+---------------+----------+--------+--------+
@@ -252,8 +250,8 @@ mysql>
     +----+-------+------------+-----------+---------------+----------+--------+--------+---------+
     | id | name  | dob        | city      | email         | password | status | salary | contact |
     +----+-------+------------+-----------+---------------+----------+--------+--------+---------+
-    |  1 | ankit | 1994-01-12 | thane     | ashinde@gm.io | abc      | A      |   NULL |    NULL |
-    |  2 | sam   | 1989-03-09 | nyc       | sam@gm.io     | 1234     | A      |   NULL |    NULL |
+    |  1 | ankit | 1994-01-12 | thane     | ashinde@gm.io | abc      | N      |   NULL |    NULL |
+    |  2 | sam   | 1989-03-09 | nyc       | sam@gm.io     | 1234     | N      |   NULL |    NULL |
     |  3 | john  | 2012-12-01 | las vagas | john@gm.io    | john321  | I      |   NULL |    NULL |
     |  5 | suraj | 1988-01-12 | goa       | rao@gm.io     | rao123   | I      |   NULL |    NULL |
     +----+-------+------------+-----------+---------------+----------+--------+--------+---------+
@@ -281,8 +279,8 @@ mysql>
     +----+-------+------------+-----------+---------------+----------+--------+--------+
     | id | name  | dob        | city      | email         | password | status | salary |
     +----+-------+------------+-----------+---------------+----------+--------+--------+
-    |  1 | ankit | 1994-01-12 | thane     | ashinde@gm.io | abc      | A      |   NULL |
-    |  2 | sam   | 1989-03-09 | nyc       | sam@gm.io     | 1234     | A      |   NULL |
+    |  1 | ankit | 1994-01-12 | thane     | ashinde@gm.io | abc      | N      |   NULL |
+    |  2 | sam   | 1989-03-09 | nyc       | sam@gm.io     | 1234     | N      |   NULL |
     |  3 | john  | 2012-12-01 | las vagas | john@gm.io    | john321  | I      |   NULL |
     |  5 | suraj | 1988-01-12 | goa       | rao@gm.io     | rao123   | I      |   NULL |
     +----+-------+------------+-----------+---------------+----------+--------+--------+
@@ -302,8 +300,8 @@ mysql>
     +----+-------+------------+-----------+---------------+----------+--------+--------+---------+
     | id | name  | dob        | city      | email         | password | status | salary | contact |
     +----+-------+------------+-----------+---------------+----------+--------+--------+---------+
-    |  1 | ankit | 1994-01-12 | thane     | ashinde@gm.io | abc      | A      |   NULL |       0 |
-    |  2 | sam   | 1989-03-09 | nyc       | sam@gm.io     | 1234     | A      |   NULL |       0 |
+    |  1 | ankit | 1994-01-12 | thane     | ashinde@gm.io | abc      | N      |   NULL |       0 |
+    |  2 | sam   | 1989-03-09 | nyc       | sam@gm.io     | 1234     | N      |   NULL |       0 |
     |  3 | john  | 2012-12-01 | las vagas | john@gm.io    | john321  | I      |   NULL |       0 |
     |  5 | suraj | 1988-01-12 | goa       | rao@gm.io     | rao123   | I      |   NULL |       0 |
     +----+-------+------------+-----------+---------------+----------+--------+--------+---------+
@@ -321,8 +319,8 @@ mysql>
     +----+-------+------------+-----------+---------------+----------+--------+---------+
     | id | name  | dob        | city      | email         | password | status | contact |
     +----+-------+------------+-----------+---------------+----------+--------+---------+
-    |  1 | ankit | 1994-01-12 | thane     | ashinde@gm.io | abc      | A      |       0 |
-    |  2 | sam   | 1989-03-09 | nyc       | sam@gm.io     | 1234     | A      |       0 |
+    |  1 | ankit | 1994-01-12 | thane     | ashinde@gm.io | abc      | N      |       0 |
+    |  2 | sam   | 1989-03-09 | nyc       | sam@gm.io     | 1234     | N      |       0 |
     |  3 | john  | 2012-12-01 | las vagas | john@gm.io    | john321  | I      |       0 |
     |  5 | suraj | 1988-01-12 | goa       | rao@gm.io     | rao123   | I      |       0 |
     +----+-------+------------+-----------+---------------+----------+--------+---------+
@@ -346,14 +344,102 @@ mysql>
     +----+-------+------------+-----------+--------+---------------+----------+--------+---------+
     | id | name  | dob        | city      | salary | email         | password | status | contact |
     +----+-------+------------+-----------+--------+---------------+----------+--------+---------+
-    |  1 | ankit | 1994-01-12 | thane     |  10000 | ashinde@gm.io | abc      | A      |       0 |
-    |  2 | sam   | 1989-03-09 | nyc       |  10000 | sam@gm.io     | 1234     | A      |       0 |
+    |  1 | ankit | 1994-01-12 | thane     |  10000 | ashinde@gm.io | abc      | N      |       0 |
+    |  2 | sam   | 1989-03-09 | nyc       |  10000 | sam@gm.io     | 1234     | N      |       0 |
     |  3 | john  | 2012-12-01 | las vagas |  10000 | john@gm.io    | john321  | I      |       0 |
     |  5 | suraj | 1988-01-12 | goa       |  10000 | rao@gm.io     | rao123   | I      |       0 |
     +----+-------+------------+-----------+--------+---------------+----------+--------+---------+
     4 rows in set (0.00 sec)
 </pre>
 <p>in above i have added default value to avoid null</p>
+
+<p>Now i want to update mutiple values</p>
+<p>in above my salary has same value 10000</p>
+<p>i will upadte em'll</p>
+<p>Syntax:</p>
+<pre>
+    UPDATE table_name
+    SET column_name = CASE
+    WHEN condition1 THEN value1
+    WHEN condition2 THEN value2
+    WHEN condition3 THEN value3
+    ELSE default_value
+    END
+    WHERE condition;
+</pre>
+
+<pre>
+    mysql> update users
+    -> set salary = case
+    -> when id=1 then 12000
+    -> when id=2 then 15000
+    -> when id=3 then 18000
+    -> when id=5 then 20000
+    -> else salary
+    -> end;
+    Query OK, 4 rows affected (0.01 sec)
+    Rows matched: 4  Changed: 4  Warnings: 0
+
+    mysql> select * from users;
+    +----+-------+------------+-----------+--------+---------------+----------+--------+---------+
+    | id | name  | dob        | city      | salary | email         | password | status | contact |
+    +----+-------+------------+-----------+--------+---------------+----------+--------+---------+
+    |  1 | ankit | 1994-01-12 | thane     |  12000 | ashinde@gm.io | abc      | N      |       0 |
+    |  2 | sam   | 1989-03-09 | nyc       |  15000 | sam@gm.io     | 1234     | N      |       0 |
+    |  3 | john  | 2012-12-01 | las vagas |  18000 | john@gm.io    | john321  | I      |       0 |
+    |  5 | suraj | 1988-01-12 | goa       |  20000 | rao@gm.io     | rao123   | I      |       0 |
+    +----+-------+------------+-----------+--------+---------------+----------+--------+---------+
+    4 rows in set (0.00 sec)
+</pre>
+
+<p>Now lets delete one row</p>
+
+<p>Syntax:</p>
+<pre>
+    DELETE FROM table_name
+    WHERE condition;
+</pre>
+
+<pre>
+    mysql> delete from users where id =5;
+    Query OK, 1 row affected (0.01 sec)
+
+    mysql> select * from users;
+    +----+-------+------------+-----------+--------+---------------+----------+--------+---------+
+    | id | name  | dob        | city      | salary | email         | password | status | contact |
+    +----+-------+------------+-----------+--------+---------------+----------+--------+---------+
+    |  1 | ankit | 1994-01-12 | thane     |  12000 | ashinde@gm.io | abc      | N      |       0 |
+    |  2 | sam   | 1989-03-09 | nyc       |  15000 | sam@gm.io     | 1234     | N      |       0 |
+    |  3 | john  | 2012-12-01 | las vagas |  18000 | john@gm.io    | john321  | I      |       0 |
+    +----+-------+------------+-----------+--------+---------------+----------+--------+---------+
+    3 rows in set (0.00 sec)
+</pre>
+
+<p>Now we will insert multiple data at a time</p>
+<pre>
+    mysql> insert into users (name, dob, city, salary, email, password, status, contact)
+    -> values ('John Doe', '1990-05-15', 'New York', 12000, 'john@example.com', 'password123', 'A', 12345),
+    -> ('Jane Smith', '1985-09-25', 'Los Angeles', 15000, 'jane@example.com', 'password456', 'A', 67890),
+    -> ('Emily Brown', '1992-02-10', 'Chicago', 13000, 'emily@example.com', 'password789', 'I', 11223);
+    Query OK, 3 rows affected (0.00 sec)
+    Records: 3  Duplicates: 0  Warnings: 0
+
+    mysql> select * from users;
+    +----+-------------+------------+-------------+--------+-------------------+-------------+--------+---------+
+    | id | name        | dob        | city        | salary | email             | password    | status | contact |
+    +----+-------------+------------+-------------+--------+-------------------+-------------+--------+---------+
+    |  1 | ankit       | 1994-01-12 | thane       |  12000 | ashinde@gm.io     | abc         | N      |       0 |
+    |  2 | sam         | 1989-03-09 | nyc         |  15000 | sam@gm.io         | 1234        | N      |       0 |
+    |  3 | john        | 2012-12-01 | las vagas   |  18000 | john@gm.io        | john321     | I      |       0 |
+    |  6 | John Doe    | 1990-05-15 | New York    |  12000 | john@example.com  | password123 | A      |   12345 |
+    |  7 | Jane Smith  | 1985-09-25 | Los Angeles |  15000 | jane@example.com  | password456 | A      |   67890 |
+    |  8 | Emily Brown | 1992-02-10 | Chicago     |  13000 | emily@example.com | password789 | I      |   11223 |
+    +----+-------------+------------+-------------+--------+-------------------+-------------+--------+---------+
+    6 rows in set (0.00 sec)
+</pre>
+<p>it added data after 5 bcoz of auto incremet we delete id 5 so no id 5</p>
+<p>value will start inserting after 5 </p>
+<p>Your task add values for contact that are 0</p>
     <!-- Print button -->
 <!--     <button onclick="window.print()">Print</button> -->
 
