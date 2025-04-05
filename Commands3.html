@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sql Commands</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Playwrite+VN:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Sixtyfour+Convergence&display=swap');
+        body {
+            
+            line-height: 1.6;
+            font-family: "Poppins", sans-serif;
+            font-weight: 400;
+            padding: 0 20px;
+            background-color:#000;
+        }
+        h1 {
+            /* background-color: aqua; */
+            text-align: center;
+            font-size: 20px;
+            color: green;
+        }
+        p,h3{
+            color: #ccc;
+
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            color:rgb(12, 56, 87);
+            font-weight: 900;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+
+        hr{
+            border-bottom: 3px solid red !important;
+        }
+
+        @media print {
+            body {
+                font-size: 14px; /* Adjust font size for printing */
+            }
+
+            /* Hide elements you don't want to print */
+            button {
+                display: none; /* Hide the print button */
+            }
+
+            /* Remove default headers and footers in browsers */
+            @page {
+                margin: 0;
+                size: auto;
+            }
+
+            /* Hide the date and URL (typically in headers or footers) */
+            header, footer {
+                display: none;
+            }
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body style="background-color: #000;">
+    <h1>Sql Commands</h1>    
+    <pre>
+        In This we will learn:
+        Operators in Mysql
+        =	Equal	
+        ! not equal to
+        <>	Not equal. Note: In some versions of SQL this operator may be written as !=	
+        >	Greater than	
+        >=	Greater than or equal
+        <	Less than	
+        <=	Less than or equal	
+        BETWEEN	,Between a certain range	
+        IN	To specify multiple possible values for a column
+        LIKE is used for Search pattern
+        The AND operator displays a record if all the conditions separated by AND are TRUE.
+        The OR operator  displays a record if any of the conditions separated by OR is TRUE.
+        The NOT operator displays a record if the condition(s) is NOT TRUE.
+
+    </pre>
+    <p>i) Log in to wampp or xampp</p>
+    <p>ii) I am using wampp </p>
+    <p>my password is empty</p>
+    <pre>
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 10
+Server version: 9.1.0 MySQL Community Server - GPL
+        
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+        
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+        
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+        
+mysql>
+
+
+    </pre>
+<p>you are now login to mysql console.To show some of databases present type:</p>
+<pre>
+    mysql> show databases;
+    +--------------------+
+    | Database           |
+    +--------------------+
+    | ajax_project       |
+    | information_schema |
+    | mysql              |
+    | performance_schema |
+    | product            |
+    | session_management |
+    | sys                |
+    | users              |
+    +--------------------+
+    8 rows in set (0.03 sec)
+</pre>
+<p>use your database with use command</p>
+<pre>
+    mysql> use users;
+    Database changed
+    mysql>
+</pre>
+
+<p>Now fetch your data from table</p>
+
+<pre>
+    mysql> select * from users;
+    +----+-------------+------------+-------------+--------+-------------------+-------------+--------+---------+
+    | id | username    | dob        | city        | salary | email             | password    | status | contact |
+    +----+-------------+------------+-------------+--------+-------------------+-------------+--------+---------+
+    |  1 | ankit       | 1994-01-12 | thane       |  12000 | ashinde@gm.io     | abc         | N      |       0 |
+    |  2 | sam         | 1989-03-09 | nyc         |  15000 | sam@gm.io         | 1234        | N      |       0 |
+    |  3 | john        | 2012-12-01 | las vagas   |  18000 | john@gm.io        | john321     | I      |       0 |
+    |  5 | John Doe    | 1990-05-15 | New York    |  12000 | john@example.com  | password123 | A      |   12345 |
+    |  6 | Jane Smith  | 1985-09-25 | Los Angeles |  15000 | jane@example.com  | password456 | A      |   67890 |
+    |  7 | Emily Brown | 1992-02-10 | Chicago     |  13000 | emily@example.com | password789 | I      |   11223 |
+    +----+-------------+------------+-------------+--------+-------------------+-------------+--------+---------+
+    6 rows in set (0.00 sec)
+</pre>
+
+<p>Equal to (=)</p>
+<pre>
+    mysql> select * from users where salary=12000;
+    +----+----------+------------+----------+--------+------------------+-------------+--------+---------+
+    | id | username | dob        | city     | salary | email            | password    | status | contact |
+    +----+----------+------------+----------+--------+------------------+-------------+--------+---------+
+    |  1 | ankit    | 1994-01-12 | thane    |  12000 | ashinde@gm.io    | abc         | N      |       0 |
+    |  5 | John Doe | 1990-05-15 | New York |  12000 | john@example.com | password123 | A      |   12345 |
+    +----+----------+------------+----------+--------+------------------+-------------+--------+---------+
+</pre>
+
+<p>Not Equal to (!)</p>  
+<pre>
+    mysql> select * from users where status !="A";
+    +----+-------------+------------+-----------+--------+-------------------+-------------+--------+---------+
+    | id | username    | dob        | city      | salary | email             | password    | status | contact |
+    +----+-------------+------------+-----------+--------+-------------------+-------------+--------+---------+
+    |  1 | ankit       | 1994-01-12 | thane     |  12000 | ashinde@gm.io     | abc         | N      |       0 |
+    |  2 | sam         | 1989-03-09 | nyc       |  15000 | sam@gm.io         | 1234        | N      |       0 |
+    |  3 | john        | 2012-12-01 | las vagas |  18000 | john@gm.io        | john321     | I      |       0 |
+    |  7 | Emily Brown | 1992-02-10 | Chicago   |  13000 | emily@example.com | password789 | I      |   11223 |
+    +----+-------------+------------+-----------+--------+-------------------+-------------+--------+---------+
+    4 rows in set (0.00 sec)
+</pre> 
+
+<p>Not Equal to  (<>) </p>
+
+<pre>
+    mysql>  select * from users where status <>"I";
+    +----+------------+------------+-------------+--------+------------------+-------------+--------+---------+
+    | id | username   | dob        | city        | salary | email            | password    | status | contact |
+    +----+------------+------------+-------------+--------+------------------+-------------+--------+---------+
+    |  1 | ankit      | 1994-01-12 | thane       |  12000 | ashinde@gm.io    | abc         | N      |       0 |
+    |  2 | sam        | 1989-03-09 | nyc         |  15000 | sam@gm.io        | 1234        | N      |       0 |
+    |  5 | John Doe   | 1990-05-15 | New York    |  12000 | john@example.com | password123 | A      |   12345 |
+    |  6 | Jane Smith | 1985-09-25 | Los Angeles |  15000 | jane@example.com | password456 | A      |   67890 |
+    +----+------------+------------+-------------+--------+------------------+-------------+--------+---------+
+    4 rows in set (0.00 sec)
+</pre>
+
+<p>Greater than (>)</p>
+<pre>
+    mysql> select * from users where salary > 12000;
+    +----+-------------+------------+-------------+--------+-------------------+-------------+--------+---------+
+    | id | username    | dob        | city        | salary | email             | password    | status | contact |
+    +----+-------------+------------+-------------+--------+-------------------+-------------+--------+---------+
+    |  2 | sam         | 1989-03-09 | nyc         |  15000 | sam@gm.io         | 1234        | N      |       0 |
+    |  3 | john        | 2012-12-01 | las vagas   |  18000 | john@gm.io        | john321     | I      |       0 |
+    |  6 | Jane Smith  | 1985-09-25 | Los Angeles |  15000 | jane@example.com  | password456 | A      |   67890 |
+    |  7 | Emily Brown | 1992-02-10 | Chicago     |  13000 | emily@example.com | password789 | I      |   11223 |
+    +----+-------------+------------+-------------+--------+-------------------+-------------+--------+---------+
+    4 rows in set (0.01 sec)
+</pre>
+<p>Greater than equal to (>=)</p>
+<pre>
+    mysql> select * from users where salary >= 15000;
+    +----+------------+------------+-------------+--------+------------------+-------------+--------+---------+
+    | id | username   | dob        | city        | salary | email            | password    | status | contact |
+    +----+------------+------------+-------------+--------+------------------+-------------+--------+---------+
+    |  2 | sam        | 1989-03-09 | nyc         |  15000 | sam@gm.io        | 1234        | N      |       0 |
+    |  3 | john       | 2012-12-01 | las vagas   |  18000 | john@gm.io       | john321     | I      |       0 |
+    |  6 | Jane Smith | 1985-09-25 | Los Angeles |  15000 | jane@example.com | password456 | A      |   67890 |
+    +----+------------+------------+-------------+--------+------------------+-------------+--------+---------+
+    3 rows in set (0.00 sec)
+    
+</pre>
+<p>Less tha (<)</p>
+<pre>
+    mysql> select * from users where salary < 13000;
+    +----+----------+------------+----------+--------+------------------+-------------+--------+---------+
+    | id | username | dob        | city     | salary | email            | password    | status | contact |
+    +----+----------+------------+----------+--------+------------------+-------------+--------+---------+
+    |  1 | ankit    | 1994-01-12 | thane    |  12000 | ashinde@gm.io    | abc         | N      |       0 |
+    |  5 | John Doe | 1990-05-15 | New York |  12000 | john@example.com | password123 | A      |   12345 |
+    +----+----------+------------+----------+--------+------------------+-------------+--------+---------+
+    2 rows in set (0.00 sec)
+</pre>
+<p>Less than equal to (<=)</p>
+<pre>
+    mysql> select * from users where salary <= 13000;
+    +----+-------------+------------+----------+--------+-------------------+-------------+--------+---------+
+    | id | username    | dob        | city     | salary | email             | password    | status | contact |
+    +----+-------------+------------+----------+--------+-------------------+-------------+--------+---------+
+    |  1 | ankit       | 1994-01-12 | thane    |  12000 | ashinde@gm.io     | abc         | N      |       0 |
+    |  5 | John Doe    | 1990-05-15 | New York |  12000 | john@example.com  | password123 | A      |   12345 |
+    |  7 | Emily Brown | 1992-02-10 | Chicago  |  13000 | emily@example.com | password789 | I      |   11223 |
+    +----+-------------+------------+----------+--------+-------------------+-------------+--------+---------+
+    3 rows in set (0.00 sec)
+</pre>
+<p>Between , suppose we want salary between 15k to 18k</p>
+<pre>
+    mysql> select * from users where salary between 15000 and 18000;
+    +----+------------+------------+-------------+--------+------------------+-------------+--------+---------+
+    | id | username   | dob        | city        | salary | email            | password    | status | contact |
+    +----+------------+------------+-------------+--------+------------------+-------------+--------+---------+
+    |  2 | sam        | 1989-03-09 | nyc         |  15000 | sam@gm.io        | 1234        | N      |       0 |
+    |  3 | john       | 2012-12-01 | las vagas   |  18000 | john@gm.io       | john321     | I      |       0 |
+    |  6 | Jane Smith | 1985-09-25 | Los Angeles |  15000 | jane@example.com | password456 | A      |   67890 |
+    +----+------------+------------+-------------+--------+------------------+-------------+--------+---------+
+    3 rows in set (0.00 sec)
+</pre>
+<p>In, To specify multiple possible values for a column</p>
+<pre>
+    mysql> select * from users where id in(1,5,7);
+    +----+-------------+------------+----------+--------+-------------------+-------------+--------+---------+
+    | id | username    | dob        | city     | salary | email             | password    | status | contact |
+    +----+-------------+------------+----------+--------+-------------------+-------------+--------+---------+
+    |  1 | ankit       | 1994-01-12 | thane    |  12000 | ashinde@gm.io     | abc         | N      |       0 |
+    |  5 | John Doe    | 1990-05-15 | New York |  12000 | john@example.com  | password123 | A      |   12345 |
+    |  7 | Emily Brown | 1992-02-10 | Chicago  |  13000 | emily@example.com | password789 | I      |   11223 |
+    +----+-------------+------------+----------+--------+-------------------+-------------+--------+---------+
+3 rows in set (0.00 sec)
+</pre>
+
+<p>AND T T = T then only u will get output if one of it is F T OR TF then it will say empty set
+</p>
+<pre>
+    mysql> select * from users where username="ankit" and status="N";
+    +----+----------+------------+-------+--------+---------------+----------+--------+---------+
+    | id | username | dob        | city  | salary | email         | password | status | contact |
+    +----+----------+------------+-------+--------+---------------+----------+--------+---------+
+    |  1 | ankit    | 1994-01-12 | thane |  12000 | ashinde@gm.io | abc      | N      |       0 |
+    +----+----------+------------+-------+--------+---------------+----------+--------+---------+
+    1 row in set (0.00 sec)
+</pre>
+
+<p>OR one should be T</p>
+<pre>
+    mysql> select * from users where salary=12000 or city ="New York";
+    +----+----------+------------+----------+--------+------------------+-------------+--------+---------+
+    | id | username | dob        | city     | salary | email            | password    | status | contact |
+    +----+----------+------------+----------+--------+------------------+-------------+--------+---------+
+    |  1 | ankit    | 1994-01-12 | thane    |  12000 | ashinde@gm.io    | abc         | N      |       0 |
+    |  5 | John Doe | 1990-05-15 | New York |  12000 | john@example.com | password123 | A      |   12345 |
+    +----+----------+------------+----------+--------+------------------+-------------+--------+---------+
+    2 rows in set (0.00 sec)
+</pre>
+<p>Not, it makes true to false & vice versa</p>
+<pre>
+    mysql> select * from users where not status="A";
+    +----+-------------+------------+-----------+--------+-------------------+-------------+--------+---------+
+    | id | username    | dob        | city      | salary | email             | password    | status | contact |
+    +----+-------------+------------+-----------+--------+-------------------+-------------+--------+---------+
+    |  1 | ankit       | 1994-01-12 | thane     |  12000 | ashinde@gm.io     | abc         | N      |       0 |
+    |  2 | sam         | 1989-03-09 | nyc       |  15000 | sam@gm.io         | 1234        | N      |       0 |
+    |  3 | john        | 2012-12-01 | las vagas |  18000 | john@gm.io        | john321     | I      |       0 |
+    |  7 | Emily Brown | 1992-02-10 | Chicago   |  13000 | emily@example.com | password789 | I      |   11223 |
+    +----+-------------+------------+-----------+--------+-------------------+-------------+--------+---------+
+    4 rows in set (0.00 sec)
+</pre>
+<p>LIKE CLAUSE</p>
+<p>Syntax:</p>
+<pre>
+    SELECT column1, column2, ...
+    FROM table_name
+    WHERE column LIKE pattern;
+</pre>
+
+<pre>
+    WHERE username LIKE 'a%'	Finds any values that start with "a"
+    WHERE username LIKE '%a'	Finds any values that end with "a"
+    WHERE username LIKE '%or%'	Finds any values that have "or" in any position
+    WHERE username LIKE '_r%'	Finds any values that have "r" in the second position
+    WHERE username LIKE 'a_%'	Finds any values that start with "a" and are at least 2 characters in length
+    WHERE username LIKE 'a__%'	Finds any values that start with "a" and are at least 3 characters in length
+    WHERE username LIKE 'a%o'	Finds any values that start with "a" and ends with "o"
+    
+</pre>
+
+<pre>
+    mysql> select * from users;
+    +----+-------------+------------+-------------+--------+-------------------+-------------+--------+---------+
+    | id | username    | dob        | city        | salary | email             | password    | status | contact |
+    +----+-------------+------------+-------------+--------+-------------------+-------------+--------+---------+
+    |  1 | ankit       | 1994-01-12 | thane       |  12000 | ashinde@gm.io     | abc         | N      |       0 |
+    |  2 | sam         | 1989-03-09 | nyc         |  15000 | sam@gm.io         | 1234        | N      |       0 |
+    |  3 | john        | 2012-12-01 | las vagas   |  18000 | john@gm.io        | john321     | I      |       0 |
+    |  5 | John Doe    | 1990-05-15 | New York    |  12000 | john@example.com  | password123 | A      |   12345 |
+    |  6 | Jane Smith  | 1985-09-25 | Los Angeles |  15000 | jane@example.com  | password456 | A      |   67890 |
+    |  7 | Emily Brown | 1992-02-10 | Chicago     |  13000 | emily@example.com | password789 | I      |   11223 |
+    +----+-------------+------------+-------------+--------+-------------------+-------------+--------+---------+
+    6 rows in set (0.00 sec)
+</pre>
+<p>Start with letter s</p>
+<pre>
+    mysql> select * from users where username like "s%";
+    +----+----------+------------+------+--------+-----------+----------+--------+---------+
+    | id | username | dob        | city | salary | email     | password | status | contact |
+    +----+----------+------------+------+--------+-----------+----------+--------+---------+
+    |  2 | sam      | 1989-03-09 | nyc  |  15000 | sam@gm.io | 1234     | N      |       0 |
+    +----+----------+------------+------+--------+-----------+----------+--------+---------+
+    1 row in set (0.01 sec)
+</pre>
+<p>Ends with letter .io</p>
+
+<pre>
+    mysql> select * from users where email like "%.io";
+    +----+----------+------------+-----------+--------+---------------+----------+--------+---------+
+    | id | username | dob        | city      | salary | email         | password | status | contact |
+    +----+----------+------------+-----------+--------+---------------+----------+--------+---------+
+    |  1 | ankit    | 1994-01-12 | thane     |  12000 | ashinde@gm.io | abc      | N      |       0 |
+    |  2 | sam      | 1989-03-09 | nyc       |  15000 | sam@gm.io     | 1234     | N      |       0 |
+    |  3 | john     | 2012-12-01 | las vagas |  18000 | john@gm.io    | john321  | I      |       0 |
+    +----+----------+------------+-----------+--------+---------------+----------+--------+---------+
+    3 rows in set (0.00 sec)
+</pre>
+
+<p>Find middle one</p>
+
+<pre>
+    mysql> select * from users where username like "%oh%";
+    +----+----------+------------+-----------+--------+------------------+-------------+--------+---------+
+    | id | username | dob        | city      | salary | email            | password    | status | contact |
+    +----+----------+------------+-----------+--------+------------------+-------------+--------+---------+
+    |  3 | john     | 2012-12-01 | las vagas |  18000 | john@gm.io       | john321     | I      |       0 |
+    |  5 | John Doe | 1990-05-15 | New York  |  12000 | john@example.com | password123 | A      |   12345 |
+    +----+----------+------------+-----------+--------+------------------+-------------+--------+---------+
+    2 rows in set (0.00 sec)
+</pre>
+
+<p>Atleast second position</p>
+
+<pre>
+    mysql> select * from users where username like "_a%";
+    +----+------------+------------+-------------+--------+------------------+-------------+--------+---------+
+    | id | username   | dob        | city        | salary | email            | password    | status | contact |
+    +----+------------+------------+-------------+--------+------------------+-------------+--------+---------+
+    |  2 | sam        | 1989-03-09 | nyc         |  15000 | sam@gm.io        | 1234        | N      |       0 |
+    |  6 | Jane Smith | 1985-09-25 | Los Angeles |  15000 | jane@example.com | password456 | A      |   67890 |
+    +----+------------+------------+-------------+--------+------------------+-------------+--------+---------+
+    2 rows in set (0.00 sec)
+</pre>
+<p>starts with j atleat take 2character</p>
+<pre>
+    mysql> select * from users where username like "j_%";
+    +----+------------+------------+-------------+--------+------------------+-------------+--------+---------+
+    | id | username   | dob        | city        | salary | email            | password    | status | contact |
+    +----+------------+------------+-------------+--------+------------------+-------------+--------+---------+
+    |  3 | john       | 2012-12-01 | las vagas   |  18000 | john@gm.io       | john321     | I      |       0 |
+    |  5 | John Doe   | 1990-05-15 | New York    |  12000 | john@example.com | password123 | A      |   12345 |
+    |  6 | Jane Smith | 1985-09-25 | Los Angeles |  15000 | jane@example.com | password456 | A      |   67890 |
+    +----+------------+------------+-------------+--------+------------------+-------------+--------+---------+
+    3 rows in set (0.00 sec)
+</pre>
+
+<p>ORDER BY</p>
+<p>Syntax:</p>
+<pre>
+    SELECT * FROM table_name
+    ORDER BY Column_name Desc;
+</pre>
+<pre>
+    mysql> select * from users order by username desc;
+    +----+-------------+------------+-------------+--------+-------------------+-------------+--------+---------+
+    | id | username    | dob        | city        | salary | email             | password    | status | contact |
+    +----+-------------+------------+-------------+--------+-------------------+-------------+--------+---------+
+    |  2 | sam         | 1989-03-09 | nyc         |  15000 | sam@gm.io         | 1234        | N      |       0 |
+    |  5 | John Doe    | 1990-05-15 | New York    |  12000 | john@example.com  | password123 | A      |   12345 |
+    |  3 | john        | 2012-12-01 | las vagas   |  18000 | john@gm.io        | john321     | I      |       0 |
+    |  6 | Jane Smith  | 1985-09-25 | Los Angeles |  15000 | jane@example.com  | password456 | A      |   67890 |
+    |  7 | Emily Brown | 1992-02-10 | Chicago     |  13000 | emily@example.com | password789 | I      |   11223 |
+    |  1 | ankit       | 1994-01-12 | thane       |  12000 | ashinde@gm.io     | abc         | N      |       0 |
+    +----+-------------+------------+-------------+--------+-------------------+-------------+--------+---------+
+    6 rows in set (0.00 sec)
+</pre>
+    <!-- Print button -->
+<!--     <button onclick="window.print()">Print</button> -->
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item">
+            <a class="page-link" href="index.html" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="page-item"><a class="page-link" href="index.html">1</a></li>
+          <li class="page-item"><a class="page-link" href="Commands2.html">2</a></li>
+          <li class="page-item active"><a class="page-link" href="Commands3.html">3</a></li>
+          <li class="page-item"><a class="page-link" href="Commands4.html">4</a></li>
+
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

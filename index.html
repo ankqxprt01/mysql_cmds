@@ -224,14 +224,14 @@ Empty set (0.02 sec)
 
 <pre>
     CREATE TABLE users (
-        ->     id INT PRIMARY KEY AUTO_INCREMENT,
-        ->     name VARCHAR(100) NOT NULL,
-        ->     dob DATE,
-        ->     city VARCHAR(100),
-        ->     email VARCHAR(100) UNIQUE,
-        ->     password VARCHAR(100),
-        ->     status CHAR(1) DEFAULT 'I'
-        -> );
+             id INT PRIMARY KEY AUTO_INCREMENT,
+             name VARCHAR(100) NOT NULL,
+             dob DATE,
+             city VARCHAR(100),
+             email VARCHAR(100) UNIQUE,
+             password VARCHAR(100),
+             status CHAR(1) DEFAULT 'I'
+         );
     Query OK, 0 rows affected, 1 warning (0.02 sec)
     
 </pre>
@@ -341,7 +341,7 @@ mysql>
 <p>ii)if you are using this method you need to add each value for the table</p>
 <pre>
 mysql> INSERT INTO users
--> VALUES (NULL, 'sam', '1989-03-09', 'nyc', 'sam@gm.io', '1234', 'A');
+VALUES (NULL, 'sam', '1989-03-09', 'nyc', 'sam@gm.io', '1234', 'A');
 Query OK, 1 row affected (0.00 sec)
 
 mysql> select*from users;
@@ -358,7 +358,7 @@ mysql> select*from users;
 <p>Example: (i) type</p>
 <pre>
 mysql> INSERT INTO users (name, dob, city, email, password)
--> VALUES ('john', '2012-12-01', 'las vagas', 'john@gm.io', 'john321');
+VALUES ('john', '2012-12-01', 'las vagas', 'john@gm.io', 'john321');
 Query OK, 1 row affected (0.00 sec)
 
 mysql> select * from users;
@@ -431,8 +431,10 @@ mysql>
           </li>
           <li class="page-item active"><a class="page-link" href="index.html">1</a></li>
           <li class="page-item"><a class="page-link" href="Commands2.html">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item">
+          <li class="page-item"><a class="page-link" href="Commands3.html">3</a></li>
+          <li class="page-item"><a class="page-link" href="Commands4.html">4</a></li>
+
+          <li class="page-item" disabled>
             <a class="page-link" href="Commands2.html" aria-label="Next">
               <span aria-hidden="true">&raquo;</span>
             </a>
